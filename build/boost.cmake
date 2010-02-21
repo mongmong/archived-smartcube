@@ -1,0 +1,10 @@
+FIND_PACKAGE(Boost)
+
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    link_directories(${Boost_LIBRARY_DIRS})
+    message(STATUS "Boost header files found at ${Boost_INCLUDE_DIRS}")
+    message(STATUS "Boost library files foundat at ${Boost_LIBRARY_DIRS}")
+else(Boost_FOUND)
+    message(fatal_error "Could not found Boost.")
+endif(Boost_FOUND)

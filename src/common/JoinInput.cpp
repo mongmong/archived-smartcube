@@ -1,0 +1,52 @@
+/*
+ * Copyright 2010 Chris Chou <m2chrischou@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "JoinInput.h"
+
+namespace smartcube
+{
+	JoinInput::JoinInput(std::vector<InputPtr>& inputs) :
+			_inputs(inputs)
+	{
+		// TODO Auto-generated constructor stub
+
+	}
+
+	JoinInput::~JoinInput()
+	{
+		// TODO Auto-generated destructor stub
+	}
+
+	std::vector<InputPtr>& JoinInput::getInputs()
+	{
+		return _inputs;
+	}
+
+	RecordPtr JoinInput::pop()
+	{
+		std::vector<InputPtr>::iterator iter = _inputs.begin();
+		for (; iter != _inputs.end(); ++iter)
+		{
+			RecordPtr rec = (*iter)->pop();
+			if (!rec->eof())
+			{
+				return rec;
+			}
+		}
+
+		return new Record();
+	}
+}
