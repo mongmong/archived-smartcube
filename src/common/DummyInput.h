@@ -17,6 +17,8 @@
 #ifndef DUMMYINPUT_H_
 #define DUMMYINPUT_H_
 
+#include "Input.h"
+
 namespace smartcube
 {
 	class DummyInput: public Input

@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#ifndef FILEREADER_H_
+#define FILEREADER_H_
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+class FileReader
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	public:
+		FileReader();
+		virtual ~FileReader();
+};
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
-}
-
-#endif /* LEN_H_ */
+#endif /* FILEREADER_H_ */

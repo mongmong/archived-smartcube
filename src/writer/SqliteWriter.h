@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#ifndef SQLITEWRITER_H_
+#define SQLITEWRITER_H_
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+class SqliteWriter
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	public:
+		SqliteWriter();
+		virtual ~SqliteWriter();
+};
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
-}
-
-#endif /* LEN_H_ */
+#endif /* SQLITEWRITER_H_ */

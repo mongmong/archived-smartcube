@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#ifndef FILEWRITER_H_
+#define FILEWRITER_H_
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+class FileWriter
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	public:
+		FileWriter();
+		virtual ~FileWriter();
+};
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
-}
-
-#endif /* LEN_H_ */
+#endif /* FILEWRITER_H_ */

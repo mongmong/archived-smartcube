@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#ifndef MYSQLREADER_H_
+#define MYSQLREADER_H_
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+class MySQLReader
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	public:
+		MySQLReader();
+		virtual ~MySQLReader();
+};
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
-}
-
-#endif /* LEN_H_ */
+#endif /* MYSQLREADER_H_ */

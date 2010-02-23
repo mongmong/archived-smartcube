@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#ifndef MYSQLWRITER_H_
+#define MYSQLWRITER_H_
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+class MySQLWriter
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	public:
+		MySQLWriter();
+		virtual ~MySQLWriter();
+};
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
-}
-
-#endif /* LEN_H_ */
+#endif /* MYSQLWRITER_H_ */

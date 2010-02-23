@@ -13,6 +13,10 @@ include(${PROJECT_SOURCE_DIR}/src/common/common.cmake)
 add_library(xcommon
     ../common/ConsoleApp.h
     ../common/ConsoleApp.cpp
+    ../common/DummyInput.h
+    ../common/DummyInput.cpp
+    ../common/DummyOutput.h
+    ../common/DummyOutput.cpp
     ../common/Error.h
     ../common/Error.cpp
     ../common/FileInput.h

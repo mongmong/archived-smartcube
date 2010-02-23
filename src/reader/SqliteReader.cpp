@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef LEN_H_
-#define LEN_H_
+#include "SqliteReader.h"
 
-#include "RoutineImpl.h"
-
-namespace smartcube
+SqliteReader::SqliteReader()
 {
-	class LenOp
-	{
-		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
-			{
-				out = static_cast<const std::string&> (op).size();
-			}
-	};
+	// TODO Auto-generated constructor stub
 
-	typedef SimpleRoutineWrapper<Project1To1RoutineImpl<LenOp>, LenOp> Len;
 }
 
-#endif /* LEN_H_ */
+SqliteReader::~SqliteReader()
+{
+	// TODO Auto-generated destructor stub
+}
