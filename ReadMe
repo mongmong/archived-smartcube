@@ -1,7 +1,29 @@
 SmartCube Data Manipulate Toolkit
 
+Description
+===========
 "SmartCube Data Manipulate Toolkit" is a set of command line tools for manipulating data interactively.
 
+Authors and Contributors
+========================
+Chris Chou <m2chrischou@gmail.com>, now working at Yahoo! Beijing R&D Center.
+
+License
+=======
+Apache-2.0
+
+Dependencies
+============
+Runtime dependency:
+Boost (1.42.0 or greater recommended)
+Poco (version 1.3.5 or greator recommended)
+
+Build dependency:
+CMake (version 2.6 or greater recommended)
+
+
+Modules
+=======
 *Modules*		*Tools*			*Status*
 	Extract
 				xext.csv		TBD
