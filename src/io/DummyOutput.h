@@ -21,6 +21,11 @@
 
 namespace smartcube
 {
+	/**
+	 * DummyOutput
+	 *
+	 * Dummy output object always discards records.
+	 */
 	class DummyOutput : public Output
 	{
 		public:

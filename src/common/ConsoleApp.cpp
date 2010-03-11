@@ -347,18 +347,18 @@ namespace smartcube
 		{
 			if (*iter == "-")
 			{
-				inputs.push_back(new FileInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape));
+				inputs.push_back(new SimpleInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape));
 			}
 			else
 			{
-				inputs.push_back(new FileInput(*iter, inputFieldSpt, inputGroupSpt, unescape));
+				inputs.push_back(new SimpleInput(*iter, inputFieldSpt, inputGroupSpt, unescape));
 			}
 		}
 
 		switch(inputs.size())
 		{
 			case 0:
-				return new FileInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape);
+				return new SimpleInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape);
 				break;
 			case 1:
 				return inputs[0];
@@ -389,18 +389,18 @@ namespace smartcube
 		{
 			if (*iter == "-")
 			{
-				outputs.push_back(new FileOutput(STDIN_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape));
+				outputs.push_back(new SimpleOutput(STDIN_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape));
 			}
 			else
 			{
-				outputs.push_back(new FileOutput(*iter, outputFieldSpt[0], outputGroupSpt[0], escape));
+				outputs.push_back(new SimpleOutput(*iter, outputFieldSpt[0], outputGroupSpt[0], escape));
 			}
 		}
 
 		switch(outputs.size())
 		{
 			case 0:
-				return new FileOutput(STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape);
+				return new SimpleOutput(STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape);
 				break;
 			case 1:
 				return outputs[0];

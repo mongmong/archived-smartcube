@@ -29,15 +29,18 @@
 
 namespace smartcube
 {
-	/*
-	 * TODO: add group separator
+	/**
+	 * SimpleInput
+	 *
+	 * Read simple delimited records from specified file.<br/>
+	 * A simple delimited record contains fields which are separated by one of specified characters.
 	 */
-	class FileInput: public Input
+	class SimpleInput: public Input
 	{
 		public:
-			FileInput(int fd, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
-			FileInput(const std::string& path, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
-			virtual ~FileInput();
+			SimpleInput(int fd, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
+			SimpleInput(const std::string& path, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
+			virtual ~SimpleInput();
 
 		public:
 			virtual RecordPtr pop();

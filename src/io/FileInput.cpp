@@ -22,7 +22,7 @@
 
 namespace smartcube
 {
-	FileInput::FileInput(int fd,
+	SimpleInput::SimpleInput(int fd,
 			const std::string& fieldSeparators,
 			const std::string& groupSeparators,
 			bool unquote) :
@@ -36,7 +36,7 @@ namespace smartcube
 		// TODO Auto-generated constructor stub
 	}
 
-	FileInput::FileInput(const std::string& path,
+	SimpleInput::SimpleInput(const std::string& path,
 			const std::string& fieldSeparators,
 			const std::string& groupSeparators,
 			bool unquote) :
@@ -49,12 +49,12 @@ namespace smartcube
 	{
 	}
 
-	FileInput::~FileInput()
+	SimpleInput::~SimpleInput()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
-	RecordPtr FileInput::pop()
+	RecordPtr SimpleInput::pop()
 	{
 		std::string line;
 

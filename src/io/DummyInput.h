@@ -21,6 +21,11 @@
 
 namespace smartcube
 {
+	/**
+	 * DummyInput
+	 *
+	 * Dummy input object always returns EOF record.
+	 */
 	class DummyInput: public Input
 	{
 		RecordPtr pop() {return new Record();}

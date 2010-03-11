@@ -28,12 +28,18 @@
 
 namespace smartcube
 {
-	class FileOutput : public Output
+	/**
+	 * SimpleOutput
+	 *
+	 * Write simple delimited records to specified file.<br/>
+	 * A simple delimited record contains fields which are separated by one of specified characters.
+	 */
+	class SimpleOutput : public Output
 	{
 		public:
-			FileOutput(int fd, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
-			FileOutput(const std::string& path, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
-			virtual ~FileOutput();
+			SimpleOutput(int fd, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
+			SimpleOutput(const std::string& path, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
+			virtual ~SimpleOutput();
 
 		public:
 			virtual void push(RecordPtr record);

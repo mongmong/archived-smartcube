@@ -24,7 +24,7 @@
 
 namespace smartcube
 {
-	FileOutput::FileOutput(int fd, char fieldSeparator, char groupSeparator, bool quote) :
+	SimpleOutput::SimpleOutput(int fd, char fieldSeparator, char groupSeparator, bool quote) :
 		_ofstream(fd), _fieldSeparator(fieldSeparator), _groupSeparator(groupSeparator), _quote(quote),
 		_regex("([\\\\ \\\"])")
 	{
@@ -32,19 +32,19 @@ namespace smartcube
 
 	}
 
-	FileOutput::FileOutput(
+	SimpleOutput::SimpleOutput(
 			const std::string& path, char fieldSeparator, char groupSeparator, bool quote) :
 		_ofstream(path), _fieldSeparator(fieldSeparator), _groupSeparator(groupSeparator), _quote(quote),
 		_regex("([\\\\ \\\"])")
 	{
 	}
 
-	FileOutput::~FileOutput()
+	SimpleOutput::~SimpleOutput()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
-	void FileOutput::push(RecordPtr record)
+	void SimpleOutput::push(RecordPtr record)
 	{
 
 		std::ostringstream oss;
