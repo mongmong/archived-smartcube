@@ -24,8 +24,8 @@
 #include <Poco/Util/AbstractConfiguration.h>
 
 #include "Error.h"
-#include "FileInput.h"
-#include "FileOutput.h"
+#include "SimpleInput.h"
+#include "SimpleOutput.h"
 #include "JoinInput.h"
 #include "ForkOutput.h"
 
