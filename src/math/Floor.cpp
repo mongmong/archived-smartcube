@@ -37,7 +37,7 @@ namespace smartcube
 
 		for (; !rec->eof(); output.push(rec), rec = input.pop())
 		{
-			std::size_t s = rec->count();
+			std::size_t s = rec->size();
 			rec->resize(s + _columns.size());
 
 			std::vector<std::size_t>::iterator iter = _columns.begin();

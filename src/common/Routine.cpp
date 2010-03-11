@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <Poco/UUIDGenerator.h>
+
 #include "Routine.h"
 
 namespace smartcube
@@ -21,12 +23,17 @@ namespace smartcube
 	Routine::Routine()
 	{
 		// TODO Auto-generated constructor stub
-
+		_uuid = Poco::UUIDGenerator().createOne();
 	}
 
 	Routine::~Routine()
 	{
 		// TODO Auto-generated destructor stub
+	}
+
+	Poco::UUID Routine::getID() const
+	{
+		return _uuid;
 	}
 
 	/*

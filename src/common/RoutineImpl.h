@@ -39,7 +39,7 @@ namespace smartcube
 				{
 					if (size > 0)
 					{
-						std::size_t s = rec->count();
+						std::size_t s = rec->size();
 						rec->resize(s + size);
 
 						std::vector<std::size_t>::iterator iter =
@@ -78,7 +78,7 @@ namespace smartcube
 				{
 					if (size > 0)
 					{
-						std::size_t s = rec->count();
+						std::size_t s = rec->size();
 						rec->resize(s + size);
 
 						std::size_t i = 0;
@@ -120,7 +120,7 @@ namespace smartcube
 				{
 					if (size > 0)
 					{
-						std::size_t s = rec->count();
+						std::size_t s = rec->size();
 						rec->resize(s + size);
 
 						std::size_t i = 0;

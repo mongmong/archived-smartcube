@@ -23,6 +23,9 @@
 
 namespace smartcube
 {
+	/*
+	 * TODO: use template
+	 */
 	class Ceil : public Routine
 	{
 		public:

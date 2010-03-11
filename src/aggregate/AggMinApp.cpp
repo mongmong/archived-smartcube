@@ -14,55 +14,55 @@
  * limitations under the License.
  */
 
-#include "Sum.h"
+#include "AggMin.h"
 #include "FileInput.h"
 #include "FileOutput.h"
 
-#include "SumApp.h"
+#include "AggMinApp.h"
 
 namespace smartcube
 {
-	SumApp::SumApp()
+	AggMinApp::AggMinApp()
 	{
 		// TODO Auto-generated constructor stub
 
 	}
 
-	SumApp::~SumApp()
+	AggMinApp::~AggMinApp()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
-	void SumApp::defineOptions(Poco::Util::OptionSet& options)
+	void AggMinApp::defineOptions(Poco::Util::OptionSet& options)
 	{
 		ConsoleApp::defineOptions(options);
 
 		options.addOption(Poco::Util::Option(
 				"groupby", "g", "specify group column.").required(
 				false).repeatable(false) .argument("group", true).binding(
-				"smartcube.agg.sum.groupby"));
+				"smartcube.agg.min.groupby"));
 
 		options.addOption(Poco::Util::Option(
 				"showall", "a", "show all rows.").required(
 				false).repeatable(false).binding(
-				"smartcube.agg.sum.showall"));
+				"smartcube.agg.min.showall"));
 	}
 
-	const std::string SumApp::getUsage() const
+	const std::string AggMinApp::getUsage() const
 	{
 		return "[OPTIONS] [-g groupby] [-a] [--] <column> [<column> ...]";
 	}
 
-	const std::string SumApp::getHeader() const
+	const std::string AggMinApp::getHeader() const
 	{
-		return ConsoleApp::getHeader();
+		return "Calculate minmum of rows";
 	}
 
-	int SumApp::main2(const std::vector<std::string>& args)
+	int AggMinApp::main2(const std::vector<std::string>& args)
 	{
 		std::vector<std::size_t> columns;
-		int group = config().getInt("smartcube.agg.sum.groupby", 1);
-		bool showall = config().hasOption("smartcube.agg.sum.showall");
+		int group = config().getInt("smartcube.agg.min.groupby", 1);
+		bool showall = config().hasOption("smartcube.agg.min.showall");
 
 		std::vector<std::string>::const_iterator iter = args.begin();
 		for (; iter != args.end(); ++iter)
@@ -70,11 +70,11 @@ namespace smartcube
 			columns.push_back(Poco::DynamicAny(*iter).convert<std::size_t>());
 		}
 
-		Sum sum(group, showall, columns);
-		sum.handle(*getInput(), *getOutput());
+		AggMin max(group, showall, columns);
+		max.handle(*getInput(), *getOutput());
 
 		return Poco::Util::Application::EXIT_OK;
 	}
 }
 
-POCO_APP_MAIN(smartcube::SumApp);
+POCO_APP_MAIN(smartcube::AggMinApp);

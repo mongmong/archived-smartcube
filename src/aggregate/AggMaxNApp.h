@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef SUMAPP_H_
-#define SUMAPP_H_
+#ifndef AGGMAXNAPP_H_
+#define AGGMAXNAPP_H_
 
-#include "ConsoleApp.h"
-
-namespace smartcube
+class AggMaxNApp
 {
-	class SumApp : public ConsoleApp
-	{
-		public:
-			SumApp();
-			virtual ~SumApp();
+	public:
+		AggMaxNApp();
+		virtual ~AggMaxNApp();
+};
 
-		protected:
-			void defineOptions(Poco::Util::OptionSet& options);
-
-			virtual const std::string getUsage() const;
-			virtual const std::string getHeader() const;
-
-		protected:
-			int main2(const std::vector<std::string>& args);
-	};
-}
-
-#endif /* SUMAPP_H_ */
+#endif /* AGGMAXNAPP_H_ */

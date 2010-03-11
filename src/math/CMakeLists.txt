@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
 
-include(${PROJECT_SOURCE_DIR}/build/poco.cmake)
-include(${PROJECT_SOURCE_DIR}/build/boost.cmake)
-include(${PROJECT_SOURCE_DIR}/build/smartcube.cmake)
-include(${PROJECT_SOURCE_DIR}/src/common/common.cmake)
-
 #
 # math operators
 #
@@ -91,6 +86,18 @@ add_executable(xmath.round
     RoundApp.cpp
     )
 target_link_libraries(xmath.round
+    ${COMMON_LIBS}
+    )
+    
+# xgrade
+add_executable(xmath.grade
+    ${COMMON_SRCS}
+    Grade.h
+    Grade.cpp
+    GradeApp.h
+    GradeApp.cpp
+    )
+target_link_libraries(xmath.grade
     ${COMMON_LIBS}
     )
     

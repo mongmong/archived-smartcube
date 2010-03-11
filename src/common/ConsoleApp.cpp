@@ -26,6 +26,8 @@
 #include "Error.h"
 #include "FileInput.h"
 #include "FileOutput.h"
+#include "JoinInput.h"
+#include "ForkOutput.h"
 
 #include "ConsoleApp.h"
 
@@ -85,8 +87,10 @@ namespace smartcube
 								this, &ConsoleApp::handleVersion)));
 
 		options.addOption(
-				Poco::Util::Option("print", "", "print properties.").required(false).repeatable(false).
-				callback(Poco::Util::OptionCallback<ConsoleApp>(this, &ConsoleApp::handlePrint)));
+				Poco::Util::Option("print", "", "print properties.").required(
+						false).repeatable(false). callback(
+						Poco::Util::OptionCallback<ConsoleApp>(
+								this, &ConsoleApp::handlePrint)));
 
 		options.addOption(Poco::Util::Option(
 				"define", "D", "define a configuration property").required(
@@ -96,13 +100,14 @@ namespace smartcube
 
 		options.addOption(Poco::Util::Option(
 				"input", "", "specify input source. [default: -]").required(
-				false).repeatable(false) .argument("file").binding(
-				"smartcube.common.input"));
+				false).repeatable(true) .argument("file").callback(Poco::Util::OptionCallback<
+				ConsoleApp>(this, &ConsoleApp::handleInput)));
 
 		options.addOption(Poco::Util::Option(
 				"output", "", "specify output source. [default: -]").required(
-				false).repeatable(false).argument("file").binding(
-				"smartcube.common.output"));
+				false).repeatable(true).argument("file").callback(
+				Poco::Util::OptionCallback<ConsoleApp>(
+						this, &ConsoleApp::handleOutput)));
 
 		options.addOption(
 				Poco::Util::Option(
@@ -132,48 +137,62 @@ namespace smartcube
 						false).repeatable(false).argument("sep") .binding(
 						"smartcube.common.output-field-separator"));
 
-		options.addOption(
-				Poco::Util::Option("dont-escape-output", "", "quote output fields.") .required(
-						false).repeatable(false).binding("smartcube.common.dont-escape-output"));
+		options.addOption(Poco::Util::Option(
+				"dont-escape-output", "", "quote output fields.") .required(
+				false).repeatable(false).binding(
+				"smartcube.common.dont-escape-output"));
 
-		options.addOption(
-				Poco::Util::Option("dont-unescape-input", "", "unquote input fields.") .required(
-						false).repeatable(false).binding("smartcube.common.dont-unescape-input"));
+		options.addOption(Poco::Util::Option(
+				"dont-unescape-input", "", "unquote input fields.") .required(
+				false).repeatable(false).binding(
+				"smartcube.common.dont-unescape-input"));
 	}
 
-	void ConsoleApp::handleHelp(
-			const std::string& name, const std::string& value)
+	void ConsoleApp::handleHelp(const std::string& name,
+			const std::string& value)
 	{
 		_helpRequest = true;
 		displayHelp();
 		stopOptionsProcessing();
 	}
 
-	void ConsoleApp::handleVerbose(
-			const std::string& name, const std::string& value)
+	void ConsoleApp::handleVerbose(const std::string& name,
+			const std::string& value)
 	{
 		// TODO:
 		_verbose = true;
 	}
 
-	void ConsoleApp::handlePrint(
-			const std::string& name, const std::string& value)
+	void ConsoleApp::handlePrint(const std::string& name,
+			const std::string& value)
 	{
 		_print = true;
 	}
 
-	void ConsoleApp::handleVersion(
-			const std::string& name, const std::string& value)
+	void ConsoleApp::handleVersion(const std::string& name,
+			const std::string& value)
 	{
 		_versionRequest = true;
 		displayVersion();
 		stopOptionsProcessing();
 	}
 
-	void ConsoleApp::handleDefine(
-			const std::string& name, const std::string& value)
+	void ConsoleApp::handleDefine(const std::string& name,
+			const std::string& value)
 	{
 		defineProperty(value);
+	}
+
+	void ConsoleApp::handleInput(const std::string& name,
+			const std::string& value)
+	{
+		_inputs.push_back(value);
+	}
+
+	void ConsoleApp::handleOutput(const std::string& name,
+			const std::string& value)
+	{
+		_outputs.push_back(value);
 	}
 
 	void ConsoleApp::displayHelp()
@@ -249,12 +268,12 @@ namespace smartcube
 
 	const std::string ConsoleApp::getHeader() const
 	{
-		return "SmartCube Data Manipulate Toolkit.";
+		return "SmartCube Data Manipulation Toolkit.";
 	}
 
 	const std::string ConsoleApp::getFooter() const
 	{
-		return "SmartCube Data Manipulate Toolkit.\nAuthor: Chris Chou <m2chrischou@gmail.com>\n";
+		return "SmartCube Data Manipulation Toolkit.\nAuthor: Chris Chou <m2chrischou@gmail.com>\n";
 	}
 
 	InputPtr ConsoleApp::getInput()
@@ -282,58 +301,14 @@ namespace smartcube
 				return ConsoleApp::EXIT_OK;
 			}
 
-			std::string inputfile = config().getString("smartcube.common.input", "-");
-			std::string outputfile =
-					config().getString("smartcube.common.output", "-");
-			std::string inputFieldSpt = config().getString(
-					"smartcube.common.input-field-separators", "\t");
-			std::string outputFieldSpt = config().getString(
-					"smartcube.common.output-field-separator", "\t");
-			std::string inputGroupSpt = config().getString(
-					"smartcube.common.input-group-separators", "\t");
-			std::string outputGroupSpt = config().getString(
-					"smartcube.common.output-group-separator", "\t");
-			bool escape = true;
-			bool unescape = true;
-			if (config().hasOption("smartcube.common.dont-escape-output"))
-			{
-				escape = false;
-			}
-			if (config().hasOption("smartcube.common.dont-unescape-input"))
-			{
-				unescape = false;
-			}
-
-			if (inputfile != "-")
-			{
-				// _input = new FileInput(inputfile, inputFieldSpt, unescape);
-				_input = new FileInput(inputfile, inputFieldSpt, false);
-			}
-			else
-			{
-				// _input = new FileInput(STDIN_FILENO, inputFieldSpt, unescape);
-				_input = new FileInput(STDIN_FILENO, inputFieldSpt, false);
-			}
-
-			if (outputfile != "-")
-			{
-				// _output = new FileOutput(outputfile, outputFieldSpt[0], outputGroupSpt[0], escape);
-				_output = new FileOutput(outputfile, outputFieldSpt[0], outputGroupSpt[0], false);
-			}
-			else
-			{
-				/*
-				_output = new FileOutput(
-						STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape);
-				*/
-				_output = new FileOutput(
-						STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], false);
-			}
+			_input = createInput();
+			_output = createOutput();
 
 			return main2(args);
 
 		} catch (smartcube::SmartCubeError& exc)
 		{
+			std::cout << "smartcube::SmartCubeError" << std::endl;
 			this->logger().log(exc);
 		} catch (Poco::Exception& exc)
 		{
@@ -346,5 +321,95 @@ namespace smartcube
 		}
 
 		return ConsoleApp::EXIT_SOFTWARE;
+	}
+
+	/*
+	 * Protected methods
+	 */
+
+	InputPtr ConsoleApp::createInput()
+	{
+		std::string inputFieldSpt = config().getString(
+				"smartcube.common.input-field-separators", "\t");
+		std::string inputGroupSpt = config().getString(
+				"smartcube.common.input-group-separators", "\t");
+
+		bool unescape = true;
+		if (config().hasOption("smartcube.common.dont-unescape-input"))
+		{
+			unescape = false;
+		}
+		unescape = false;
+
+		std::vector<InputPtr> inputs;
+		std::vector<std::string>::const_iterator iter = _inputs.begin();
+		for (; iter != _inputs.end(); ++iter)
+		{
+			if (*iter == "-")
+			{
+				inputs.push_back(new FileInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape));
+			}
+			else
+			{
+				inputs.push_back(new FileInput(*iter, inputFieldSpt, inputGroupSpt, unescape));
+			}
+		}
+
+		switch(inputs.size())
+		{
+			case 0:
+				return new FileInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape);
+				break;
+			case 1:
+				return inputs[0];
+				break;
+			default:
+				break;
+		}
+
+		return new JoinInput(inputs);
+	}
+
+	OutputPtr ConsoleApp::createOutput()
+	{
+		std::string outputFieldSpt = config().getString(
+				"smartcube.common.output-field-separator", "\t");
+		std::string outputGroupSpt = config().getString(
+				"smartcube.common.output-group-separator", "\t");
+		bool escape = true;
+		if (config().hasOption("smartcube.common.dont-escape-output"))
+		{
+			escape = false;
+		}
+		escape = false;
+
+		std::vector<OutputPtr> outputs;
+		std::vector<std::string>::const_iterator iter = _outputs.begin();
+		for (; iter != _outputs.end(); ++iter)
+		{
+			if (*iter == "-")
+			{
+				outputs.push_back(new FileOutput(STDIN_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape));
+			}
+			else
+			{
+				outputs.push_back(new FileOutput(*iter, outputFieldSpt[0], outputGroupSpt[0], escape));
+			}
+		}
+
+		switch(outputs.size())
+		{
+			case 0:
+				return new FileOutput(STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape);
+				break;
+			case 1:
+				return outputs[0];
+				break;
+			default:
+				return new ForkOutput(outputs);
+				break;
+		}
+
+		return new ForkOutput(outputs);
 	}
 }

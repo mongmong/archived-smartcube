@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
 
-include(${PROJECT_SOURCE_DIR}/build/poco.cmake)
-include(${PROJECT_SOURCE_DIR}/build/boost.cmake)
-include(${PROJECT_SOURCE_DIR}/build/smartcube.cmake)
-include(${PROJECT_SOURCE_DIR}/src/common/common.cmake)
-
 #
 # misc operators
 #
@@ -18,6 +13,18 @@ add_executable(xnorm
     NormApp.cpp
     )
 target_link_libraries(xnorm
+    ${COMMON_LIBS}
+    )
+
+# xmisc.tablecomparer
+add_executable(xmisc.tablecomparer
+    ${COMMON_SRCS}
+    TableComparer.h
+    TableComparer.cpp
+    TableComparerApp.h
+    TableComparerApp.cpp
+    )
+target_link_libraries(xmisc.tablecomparer
     ${COMMON_LIBS}
     )
   

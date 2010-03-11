@@ -23,6 +23,9 @@
 
 namespace smartcube
 {
+	/*
+	 * TODO: use template
+	 */
 	class Exp : public Routine
 	{
 		public:

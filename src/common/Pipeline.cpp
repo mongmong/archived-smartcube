@@ -21,9 +21,7 @@
 
 namespace smartcube
 {
-	Pipeline::Pipeline(InputPtr input, OutputPtr output) :
-			_input(input),
-			_output(output)
+	Pipeline::Pipeline()
 	{
 		// TODO Auto-generated constructor stub
 
@@ -34,23 +32,22 @@ namespace smartcube
 		// TODO Auto-generated destructor stub
 	}
 
-	TaskPtr Pipeline::getHead()
+	std::vector<TaskPtr>& Pipeline::getHead()
 	{
-		return _headTask;
+		return _headTasks;
 	}
 
-	TaskPtr Pipeline::getTail()
+	std::vector<TaskPtr>& Pipeline::getTail()
 	{
-		return _tailTask;
+		return _tailTasks;
 	}
 
-	Pipeline& Pipeline::append(RoutinePtr ptr)
+	Pipeline& Pipeline::operator +(RoutinePtr ptr)
 	{
-		SMARTCUBE_ASSERT(!_tailTask || NULL == _tailTask->output);
-
 		TaskPtr current = new Task();
 		current->routine = ptr;
 		current->previous = _tailTask;
+		// current->next
 		current->output = _output;
 
 		if (NULL == _tailTask)
@@ -76,8 +73,16 @@ namespace smartcube
 		return *this;
 	}
 
-	Pipeline& Pipeline::operator +(RoutinePtr ptr)
+	Pipeline& Pipeline::operator +(const Pipeline& pipeline)
 	{
-		return append(ptr);
+
+	}
+
+	Pipeline& Pipeline::operator *(RoutinePtr ptr)
+	{
+	}
+
+	Pipeline& Pipeline::operator *(const Pipeline& pipeline)
+	{
 	}
 }

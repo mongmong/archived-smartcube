@@ -22,19 +22,29 @@
 
 namespace smartcube
 {
-	FileInput::FileInput(
-			int fd, const std::string& fieldSeparators, bool unquote) :
-		_ifstream(fd), _escapedSeparator("\\", fieldSeparators, "\""),
-				_charSeparator(fieldSeparators.c_str(), "", boost::keep_empty_tokens),
+	FileInput::FileInput(int fd,
+			const std::string& fieldSeparators,
+			const std::string& groupSeparators,
+			bool unquote) :
+		_ifstream(fd), _fieldEscapedSeparator("\\", fieldSeparators, "\""),
+				_fieldCharSeparator(
+						fieldSeparators.c_str(), "", boost::keep_empty_tokens),
+				_groupSeparator(
+						groupSeparators.c_str(), "", boost::keep_empty_tokens),
 				_unquote(unquote)
 	{
 		// TODO Auto-generated constructor stub
 	}
 
-	FileInput::FileInput(
-			const std::string& path, const std::string& fieldSeparators, bool unquote) :
-		_ifstream(path), _escapedSeparator("\\",fieldSeparators, "\""),
-				_charSeparator(fieldSeparators.c_str(), "", boost::keep_empty_tokens),
+	FileInput::FileInput(const std::string& path,
+			const std::string& fieldSeparators,
+			const std::string& groupSeparators,
+			bool unquote) :
+		_ifstream(path), _fieldEscapedSeparator("\\", fieldSeparators, "\""),
+				_fieldCharSeparator(
+						fieldSeparators.c_str(), "", boost::keep_empty_tokens),
+				_groupSeparator(
+						groupSeparators.c_str(), "", boost::keep_empty_tokens),
 				_unquote(unquote)
 	{
 	}
@@ -50,18 +60,18 @@ namespace smartcube
 
 		RecordPtr rec(new Record());
 
-		if (std::getline(_ifstream, line))
+		while (rec->empty() && std::getline(_ifstream, line))
 		{
 			if (_unquote)
 			{
 				boost::tokenizer<boost::escaped_list_separator<char> > tokens(
-						line, _escapedSeparator);
+						line, _fieldEscapedSeparator);
 				rec->insert(rec->end(), tokens.begin(), tokens.end());
 			}
 			else
 			{
 				boost::tokenizer<boost::char_separator<char> > tokens(
-						line, _charSeparator);
+						line, _fieldCharSeparator);
 				rec->insert(rec->end(), tokens.begin(), tokens.end());
 			}
 		}

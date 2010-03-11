@@ -29,12 +29,16 @@
 
 namespace smartcube
 {
+	class Pipeline;
+
+	Pipeline& operator + (RoutinePtr op1, RoutinePtr op2);
+	Pipeline& operator * (RoutinePtr op1, RoutinePtr op2);
+
 	class Pipeline
 	{
 		public:
-			class Runner: public Poco::Runnable
-			{
-			};
+			friend Pipeline& operator + (RoutinePtr op1, RoutinePtr op2);
+			friend Pipeline& operator * (RoutinePtr op1, RoutinePtr op2);
 
 			struct Task;
 			typedef Poco::SharedPtr<Task> TaskPtr;
@@ -43,34 +47,26 @@ namespace smartcube
 					RoutinePtr 	routine;
 					InputPtr 	input;
 					OutputPtr 	output;
-					TaskPtr		previous;
-					TaskPtr		next;
-
-
+					std::vector<TaskPtr>		previous;
+					std::vector<TaskPtr>		next;
 			};
 
-			Pipeline(InputPtr input, OutputPtr output);
+			Pipeline();
 			virtual ~Pipeline();
 
 		public:
-			TaskPtr getHead();
-			TaskPtr getTail();
-
-			InputPtr getInput();
-			OutputPtr getOutput();
-
-			Pipeline& append(RoutinePtr ptr);
-			Pipeline& append(const Pipeline& pipeline);
+			std::vector<TaskPtr>& getHead();
+			std::vector<TaskPtr>& getTail();
 
 			Pipeline& operator + (RoutinePtr ptr);
 			Pipeline& operator + (const Pipeline& pipeline);
 
-		private:
-			TaskPtr _headTask;
-			TaskPtr	_tailTask;
+			Pipeline& operator * (RoutinePtr ptr);
+			Pipeline& operator * (const Pipeline& pipeline);
 
-			InputPtr	_input;
-			OutputPtr	_output;
+		private:
+			std::vector<TaskPtr>	_headTasks;
+			std::vector<TaskPtr>	_tailTasks;
 	};
 }
 

@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-#include "Count.h"
+#include "AggCount.h"
 
 namespace smartcube
 {
-	Count::Count(std::size_t group, bool showAll) :
+	AggCount::AggCount(std::size_t group, bool showAll) :
 		_group(group), _showAll(showAll)
 	{
 		// TODO Auto-generated constructor stub
 	}
 
-	Count::~Count()
+	AggCount::~AggCount()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
-	void Count::handle(Input& input, Output& output)
+	void AggCount::handle(Input& input, Output& output)
 	{
-		long count = 0;
 
 		RecordPtr previous = input.pop();
 		if (previous->eof())
@@ -39,41 +38,41 @@ namespace smartcube
 			return;
 		}
 
+		long count = 1;
 		std::size_t index = 0;
 
 		RecordPtr current = input.pop();
-		if (!current->eof())
+		for (; !current->eof(); previous = current, current = input.pop())
 		{
-			for (; !current->eof(); previous = current, current = input.pop())
+			int same = true;
+			for (index = 0; index < _group; ++index)
+			{
+				if ((*current)[index] != (*previous)[index])
+				{
+					same = false;
+					break;
+				}
+			}
+
+			if (_showAll || !same)
+			{
+				//previous->push_back(count);
+				previous->resize(previous->size() + 1);
+				*previous->rbegin() = count;
+				output.push(previous);
+			}
+
+			if (!same)
+			{
+				count = 1;
+			}
+			else
 			{
 				count++;
-
-				int same = true;
-				for (index = 0; index < _group; ++index)
-				{
-					if ((*current)[index] != (*previous)[index])
-					{
-						same = false;
-						break;
-					}
-				}
-
-				if (_showAll || !same)
-				{
-					previous->resize(previous->count() + 1);
-					*previous->rbegin() = count;
-					output.push(previous);
-				}
-
-				if (!same)
-				{
-					count = 0;
-				}
 			}
 		}
 
-		count++;
-		previous->resize(previous->count() + 1);
+		previous->resize(previous->size() + 1);
 		*previous->rbegin() = count;
 		output.push(previous);
 

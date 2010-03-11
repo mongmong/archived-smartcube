@@ -24,8 +24,8 @@ class MatrixSQL(smartcube.Routine):
                      'T',
                      '(',
                      ]
-        #for column in head:
-        #    fields = column.split('|', 1)
+        for i in xrange(len(head)):
+            head[i] = head[i].replace('@', ' ')
         #    cname = fields[0]
         #    ctype = 'str'
         #    if len(fields) > 1:

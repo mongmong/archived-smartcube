@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef COUNT_H_
-#define COUNT_H_
+#include "MatrixHeadApp.h"
 
-#include <sys/types.h>
-
-#include "Routine.h"
-
-namespace smartcube
+MatrixHeadApp::MatrixHeadApp()
 {
-	class Count : public Routine
-	{
-		public:
-			Count(std::size_t groupBy, bool showAll);
-			virtual ~Count();
+	// TODO Auto-generated constructor stub
 
-		public:
-			virtual void handle(Input& input, Output& output);
-
-		private:
-			std::size_t					_group;
-			bool						_showAll;
-	};
 }
 
-#endif /* COUNT_H_ */
+MatrixHeadApp::~MatrixHeadApp()
+{
+	// TODO Auto-generated destructor stub
+}

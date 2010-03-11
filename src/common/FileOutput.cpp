@@ -46,9 +46,10 @@ namespace smartcube
 
 	void FileOutput::push(RecordPtr record)
 	{
+
 		std::ostringstream oss;
 
-		Record::Iterator iter = record->begin();
+		Record::iterator iter = record->begin();
 		for (; iter != record->end(); ++iter)
 		{
 			if (iter != record->begin())

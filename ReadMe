@@ -16,7 +16,7 @@ Dependencies
 ============
 Runtime dependency:
 Boost (1.42.0 or greater recommended)
-Poco (version 1.3.5 or greator recommended)
+Poco (version 1.3.5 or greater recommended)
 
 Build dependency:
 CMake (version 2.6 or greater recommended)
@@ -24,104 +24,114 @@ CMake (version 2.6 or greater recommended)
 
 Modules
 =======
-*Modules*		*Tools*			*Status*
-	Extract
-				xext.csv		TBD
-				xext.mysql		TBD
-				xext.hdfs		TBD
-				xext.sqlite		TBD
-				xext.meta		TBD
-	Load
-				xload.hdfs		TBD
-				xload.meta		TBD
-	Aggregate
-				xagg.count		DONE
-				xagg.sum		DONE
-				xagg.avg		TBD
-				xagg.head		DONE
-				xagg.tail		DONE
-				xagg.max		TBD
-				xagg.min		TBD
-				xagg.medium		TBD
-				xagg.1stq		TBD
-				xagg.3stq		TBD
-	Bitwise
-				xbit.and		DONE
-				xbit.or			DONE
-				xbit.xor		DONE
-				xbit.not		DONE
-	Cleansing
-				xcls.backfill	DONE
-				xcls.default	TBD
-				xcls.convert	TBD
-	Column
-				xcol.combine	DONE
-				xcol.expand		DONE
-				xcol.split		DONE
-				xcol.xsplit		DONE
-				xcol.select		DONE
-	Encode
-				xenc.b64enc		DONE
-				xenc.b64dec		DONE
-				xenc.hexenc		DONE
-				xenc.hexdec		DONE
-				xenc.md5		TBD
-				xenc.crc32		TBD
-				xenc.octenc		TBD
-				xenc.octdec		TBD
-	Group
-				xgrp.tostr		TBD
-				xgrp.togroup	TBD
-				xgrp.group		TBD
-				xgrp.ungroup	TBD
-				xgrp.size		TBD
-				xgrp.in			TBD
-				xgrp.out		TBD
-				xgrp.split		TBD
-				xgrp.combine	TBD
-	Logic
-				xlog.and		DONE
-				xlog.or			DONE
-				xlog.xor		DONE
-				xlog.not		DONE
-				xlog.eq			DONE
-				xlog.ne			DONE
-				xlog.gt			DONE
-				xlog.ge			DONE
-				xlog.lt			DONE
-				xlog.le			DONE
-				xlog.cmp		DONE
-				xlog.inrange	TBD
-				xlog.outrange	TBD
-	Math
-				xmath.add		DONE
-				xmath.sub		DONE
-				xmath.mul		DONE
-				xmath.div		DONE
-				xmath.exp		DONE
-				xmath.log		DONE
-				xmath.floor		DONE
-				xmath.ceil		DONE
-				xmath.round		DONE
-				xmath.sign		DONE
-	Misc
-				xmisc.norm		DONE
-				xmisc.boxplot	TBD
-	Row
-				xrow.filter		DONE
-				xrow.sort		TBD
-				xrow.symjoin	TBD
-				xrow.hashjoin	TBD
-	String
-				xstr.len		DONE
-				xstr.substr		DONE
-				xstr.xformat	DONE
-				xstr.xreplace	DONE
-				xstr.strip		DONE
-	Time Series
-				xts.ma			TBD
-				xts.sma			TBD
-				xts.dma			TBD
-				xts.tma			TBD
-				xts.ar			TBD
-				xts.macd		TBD
+*Modules*       *Tools*         *Status*
+    Extract
+                xext.csv        TBD
+                xext.mysql      TBD
+                xext.hdfs       TBD
+                xext.sqlite     TBD
+                xext.meta       TBD
+    Load
+                xload.hdfs      TBD
+                xload.meta      TBD
+    Aggregate
+                xagg.count      DONE
+                xagg.sum        DONE
+                xagg.avg        TBD
+                xagg.head       DONE
+                xagg.tail       DONE
+                xagg.max        TBD
+                xagg.min        TBD
+                xagg.medium     TBD
+                xagg.1stq       TBD
+                xagg.3stq       TBD
+    Bitwise
+                xbit.and        DONE
+                xbit.or         DONE
+                xbit.xor        DONE
+                xbit.not        DONE
+    Cleansing
+                xcls.backfill   DONE
+                xcls.default    TBD
+                xcls.convert    TBD
+    Column
+                xcol.combine    DONE
+                xcol.expand     DONE
+                xcol.split      DONE
+                xcol.xsplit     DONE
+                xcol.select     DONE
+    Encode
+                xenc.b64enc     DONE
+                xenc.b64dec     DONE
+                xenc.hexenc     DONE
+                xenc.hexdec     DONE
+                xenc.md5        TBD
+                xenc.crc32      TBD
+                xenc.octenc     TBD
+                xenc.octdec     TBD
+    Group
+                xgrp.tostr      TBD
+                xgrp.togroup    TBD
+                xgrp.group      TBD
+                xgrp.ungroup    TBD
+                xgrp.size       TBD
+                xgrp.in         TBD
+                xgrp.out        TBD
+                xgrp.split      TBD
+                xgrp.combine    TBD
+    Logic
+                xlog.and        DONE
+                xlog.or         DONE
+                xlog.xor        DONE
+                xlog.not        DONE
+                xlog.eq         DONE
+                xlog.ne         DONE
+                xlog.gt         DONE
+                xlog.ge         DONE
+                xlog.lt         DONE
+                xlog.le         DONE
+                xlog.cmp        DONE
+                xlog.inrange    TBD
+                xlog.outrange   TBD
+    Math
+                xmath.add       DONE
+                xmath.sub       DONE
+                xmath.mul       DONE
+                xmath.div       DONE
+                xmath.exp       DONE
+                xmath.log       DONE
+                xmath.floor     DONE
+                xmath.ceil      DONE
+                xmath.round     DONE
+                xmath.sign      DONE
+    Misc
+                xmisc.norm      DONE
+                xmisc.boxplot   TBD
+    Reader
+                xreader.file    TBD
+                xreader.mysql   TBD
+                xreader.pgsql   TBD
+                xreader.sqlite  TBD
+    Row
+                xrow.filter     DONE
+                xrow.sort       TBD
+                xrow.symjoin    TBD
+                xrow.hashjoin   TBD
+    String
+                xstr.len        DONE
+                xstr.substr     DONE
+                xstr.xformat    DONE
+                xstr.xreplace   DONE
+                xstr.strip      DONE
+    Time Series
+                xts.ma          TBD
+                xts.sma         TBD
+                xts.dma         TBD
+                xts.tma         TBD
+                xts.ar          TBD
+                xts.macd        TBD
+    Writer
+                xwriter.file    TBD
+                xwriter.mysql   TBD
+                xwriter.pgsql   TBD
+                xwriter.sqlite  TBD

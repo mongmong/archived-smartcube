@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef COUNTAPP_H_
-#define COUNTAPP_H_
+#ifndef MATRIXUNHEAD_H_
+#define MATRIXUNHEAD_H_
 
-#include "ConsoleApp.h"
-
-namespace smartcube
+class MatrixUnhead
 {
-	class CountApp : public ConsoleApp
-	{
-		public:
-			CountApp();
-			virtual ~CountApp();
+	public:
+		MatrixUnhead();
+		virtual ~MatrixUnhead();
+};
 
-		protected:
-			void defineOptions(Poco::Util::OptionSet& options);
-
-			virtual const std::string getUsage() const;
-			virtual const std::string getHeader() const;
-
-		protected:
-			int main2(const std::vector<std::string>& args);
-	};
-}
-
-#endif /* COUNTAPP_H_ */
+#endif /* MATRIXUNHEAD_H_ */

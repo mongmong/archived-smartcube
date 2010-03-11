@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
 
-include(${PROJECT_SOURCE_DIR}/build/poco.cmake)
-include(${PROJECT_SOURCE_DIR}/build/boost.cmake)
-include(${PROJECT_SOURCE_DIR}/build/smartcube.cmake)
-include(${PROJECT_SOURCE_DIR}/src/common/common.cmake)
-
 #
 # aggregate operators
 #
@@ -12,10 +7,10 @@ include(${PROJECT_SOURCE_DIR}/src/common/common.cmake)
 # xcount
 add_executable(xagg.count
     ${COMMON_SRCS}
-    Count.h
-    Count.cpp
-    CountApp.h
-    CountApp.cpp
+    AggCount.h
+    AggCount.cpp
+    AggCountApp.h
+    AggCountApp.cpp
     )
 target_link_libraries(xagg.count
     ${COMMON_LIBS}
@@ -24,12 +19,60 @@ target_link_libraries(xagg.count
 # xsum
 add_executable(xagg.sum
     ${COMMON_SRCS}
-    Sum.h
-    Sum.cpp
-    SumApp.h
-    SumApp.cpp
+    AggSum.h
+    AggSum.cpp
+    AggSumApp.h
+    AggSumApp.cpp
     )
 target_link_libraries(xagg.sum
+    ${COMMON_LIBS}
+    )
+     
+# xagg.avg
+add_executable(xagg.avg
+    ${COMMON_SRCS}
+    AggAverage.h
+    AggAverage.cpp
+    AggAverageApp.h
+    AggAverageApp.cpp
+    )
+target_link_libraries(xagg.avg
+    ${COMMON_LIBS}
+    )
+     
+# xagg.median
+add_executable(xagg.quantile
+    ${COMMON_SRCS}
+    AggQuantile.h
+    AggQuantile.cpp
+    AggQuantileApp.h
+    AggQuantileApp.cpp
+    )
+target_link_libraries(xagg.quantile
+    ${COMMON_LIBS}
+    )
+
+# xagg.max
+add_executable(xagg.max
+    ${COMMON_SRCS}
+    AggMax.h
+    AggMax.cpp
+    AggMaxApp.h
+    AggMaxApp.cpp
+    )
+target_link_libraries(xagg.max
+    ${COMMON_LIBS}
+    )
+    
+# xagg.min
+add_executable(xagg.min
+    ${COMMON_SRCS}
+    AggMin.h
+    AggMin.cpp
+    AggMinApp.h
+    AggMinApp.cpp
+    )
+target_link_libraries(xagg.min
     ${COMMON_LIBS}
     )
     

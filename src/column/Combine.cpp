@@ -41,8 +41,8 @@ namespace smartcube
 			{
 				std::ostringstream oss;
 
-				Record::Iterator begin = rec->begin() + *_columns.begin();
-				Record::Iterator iter = begin;
+				Record::iterator begin = rec->begin() + *_columns.begin();
+				Record::iterator iter = begin;
 				for (; iter != rec->end(); iter++)
 				{
 					if (iter == begin)

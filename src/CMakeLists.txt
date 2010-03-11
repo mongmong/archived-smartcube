@@ -12,3 +12,5 @@ add_subdirectory(math)
 add_subdirectory(misc)
 add_subdirectory(row)
 add_subdirectory(string)
+
+add_subdirectory(python)

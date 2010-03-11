@@ -1,6 +1,6 @@
-name	age	gender
-Charlie	20	M
-Jean	32	F
-Jane	28	F
-Kelvin	37	M
-Tim	5	M
+name	age	gender	tall@int
+Charlie	20	M	180
+Jean	32	F	165
+Jane	28	F	163
+Kelvin	37	M	169
+Tim	5	M	172

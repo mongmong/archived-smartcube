@@ -39,12 +39,15 @@ namespace smartcube
 			void defineOptions(Poco::Util::OptionSet& options);
 
 			void handleHelp(const std::string& name, const std::string& value);
-			void handleVerbose(
-					const std::string& name, const std::string& value);
-			void handleVersion(
-					const std::string& name, const std::string& value);
+			void handleVerbose(const std::string& name,
+					const std::string& value);
+			void handleVersion(const std::string& name,
+					const std::string& value);
 			void
 			handleDefine(const std::string& name, const std::string& value);
+			void handleInput(const std::string& name, const std::string& value);
+			void
+			handleOutput(const std::string& name, const std::string& value);
 			void handlePrint(const std::string& name, const std::string& value);
 
 			void displayHelp();
@@ -64,11 +67,18 @@ namespace smartcube
 			virtual const std::string getHeader() const;
 			virtual const std::string getFooter() const;
 
+		protected:
+			InputPtr createInput();
+			OutputPtr createOutput();
+
 		private:
 			bool _helpRequest;
 			bool _versionRequest;
 			bool _verbose;
 			bool _print;
+
+			std::vector<std::string> _inputs;
+			std::vector<std::string> _outputs;
 
 			InputPtr _input;
 			OutputPtr _output;

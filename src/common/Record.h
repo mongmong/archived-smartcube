@@ -23,50 +23,86 @@
 #include <Poco/SharedPtr.h>
 #include <Poco/DynamicAny.h>
 
+#include "Error.h"
+
 namespace smartcube
 {
-	class Record
+
+	class Record: public std::vector<Poco::DynamicAny>
 	{
 		public:
-			typedef std::vector<Poco::DynamicAny>::iterator Iterator;
-			typedef std::vector<Poco::DynamicAny>::reverse_iterator
-					ReverseIterator;
 
-			Record();
-			virtual ~Record();
+			Record() {};
+			virtual ~Record() {};
 
-		public:
-
-			Iterator begin();
-			Iterator end();
-
-			ReverseIterator rbegin();
-			ReverseIterator rend();
-
-			std::size_t count() const;
-			bool eof() const;
-
-			void clear();
-
-			void resize(std::size_t newSize);
-
-			template<typename InputIterator>
-			void insert(
-					Iterator position, InputIterator first, InputIterator last)
+			inline bool eof() const
 			{
-				_fields.insert(position, first, last);
+				return size() == 0;
 			}
-			void insert(Iterator position, std::size_t n, const Poco::DynamicAny& x);
-			Iterator insert(Iterator position, const Poco::DynamicAny& x);
+
+			inline bool compare(const Record& right, size_t group) const
+			{
+				size_t index = 0;
+				for (; index < group; ++index)
+				{
+					if ((*this)[index] != right[index])
+					{
+						return false;
+					}
+				}
+
+				return true;
+			}
 
 		public:
-			Poco::DynamicAny& operator [](std::size_t index);
+			inline Poco::DynamicAny& operator [](std::size_t index)
+			{
+				if (index > 1000)
+				{
+					if (1000 - (int) index < -static_cast<int> (size()))
+					{
+						SMARTCUBE_EXCEPTION("Index %z out of range.", index);
+					}
+					return end()[1000 - (int) index];
+				}
+				else
+				{
+					if (index >= size())
+					{
+						SMARTCUBE_EXCEPTION("Index %z out of range.", index);
+					}
+					return *(begin() + index);
+				}
+			}
+
+			inline const Poco::DynamicAny& operator[] (std::size_t index) const
+			{
+				if (index > 1000)
+				{
+					if (1000 - (int) index < -static_cast<int> (size()))
+					{
+						SMARTCUBE_EXCEPTION("Index %z out of range.", index);
+					}
+					return end()[1000 - (int) index];
+				}
+				else
+				{
+					if (index >= size())
+					{
+						SMARTCUBE_EXCEPTION("Index %z out of range.", index);
+					}
+					return *(begin() + index);
+				}
+			}
 
 		private:
-			std::vector<Poco::DynamicAny> _fields;
-
-			Record(const Record&);
-			Record& operator= (const Record&);
+			Record(const Record&)
+			{
+			}
+			Record& operator=(const Record&)
+			{
+				return *this;
+			}
 	};
 
 	typedef Poco::SharedPtr<Record> RecordPtr;

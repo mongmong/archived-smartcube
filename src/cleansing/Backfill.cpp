@@ -36,7 +36,7 @@ namespace smartcube
 		{
 			for (; !rec->eof(); output.push(rec), rec = input.pop())
 			{
-				std::size_t s = rec->count();
+				std::size_t s = rec->size();
 				rec->resize(s + size);
 
 				std::size_t i = 0;

@@ -50,7 +50,7 @@ namespace smartcube
 		{
 			return;
 		}
-		groupsize = 1;
+		groupsize = 0;
 
 		std::size_t index = 0;
 

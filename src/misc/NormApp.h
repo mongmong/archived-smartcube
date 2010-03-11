@@ -37,4 +37,5 @@ namespace smartcube
 			int main2(const std::vector<std::string>& args);
 	};
 }
+
 #endif /* NORMAPP_H_ */

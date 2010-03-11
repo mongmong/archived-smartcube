@@ -63,13 +63,13 @@ namespace smartcube
 			{
 				RecordPtr ptr = new Record();
 				ptr->insert(ptr->begin(), rec->begin(), rec->end());
-				ptr->resize(rec->count() + _columns.size());
+				ptr->resize(rec->size() + _columns.size());
 
 				bool hasparts = false;
 				iter = tokenizers.begin();
 				for (; iter != tokenizers.end(); ++iter)
 				{
-					std::size_t s = rec->count() + (iter - tokenizers.begin());
+					std::size_t s = rec->size() + (iter - tokenizers.begin());
 					if (index < (*iter)->count())
 					{
 						hasparts = true;

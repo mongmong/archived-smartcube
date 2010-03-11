@@ -23,6 +23,9 @@
 
 namespace smartcube
 {
+	/*
+	 * TODO: use template
+	 */
 	class Floor : public Routine
 	{
 		public:

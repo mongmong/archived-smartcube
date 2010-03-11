@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-#ifndef SUM_H_
-#define SUM_H_
+#ifndef AGGSUMAPP_H_
+#define AGGSUMAPP_H_
 
-#include <sys/types.h>
-
-#include "Routine.h"
+#include "ConsoleApp.h"
 
 namespace smartcube
 {
-	class Sum : public Routine
+	class AggSumApp : public ConsoleApp
 	{
 		public:
-			Sum(std::size_t groupBy, bool showAll, const std::vector<std::size_t>& columns);
-			virtual ~Sum();
+			AggSumApp();
+			virtual ~AggSumApp();
 
-		public:
-			virtual void handle(Input& input, Output& output);
+		protected:
+			void defineOptions(Poco::Util::OptionSet& options);
 
-		private:
-			std::size_t					_groupBy;
-			bool						_showAll;
-			std::vector<std::size_t>	_columns;
+			virtual const std::string getUsage() const;
+			virtual const std::string getHeader() const;
+
+		protected:
+			int main2(const std::vector<std::string>& args);
 	};
 }
 
-#endif /* SUM_H_ */
+#endif /* AGGSUMAPP_H_ */

@@ -19,6 +19,8 @@
 
 #include <Poco/DynamicAny.h>
 #include <Poco/SharedPtr.h>
+#include <Poco/UUID.h>
+
 
 #include "Input.h"
 #include "Output.h"
@@ -32,11 +34,15 @@ namespace smartcube
 			virtual ~Routine();
 
 		public:
+			Poco::UUID getID() const;
+
 			virtual void handle(Input& input, Output& output) = 0;
 
 		private:
 			Routine(const Routine&);
 			Routine& operator = (const Routine&);
+
+			Poco::UUID _uuid;
 	};
 
 	typedef Poco::SharedPtr<Routine> RoutinePtr;
