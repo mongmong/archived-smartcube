@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 
 add_subdirectory(common)
+add_subdirectory(io)
+
 add_subdirectory(aggregate)
 add_subdirectory(bitwise)
 add_subdirectory(cleansing)

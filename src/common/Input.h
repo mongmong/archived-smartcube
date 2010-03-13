@@ -33,6 +33,8 @@ namespace smartcube
 
 		public:
 			virtual RecordPtr pop() = 0;
+
+			virtual RecordPtr allocate();
 	};
 
 	typedef Poco::SharedPtr<Input> InputPtr;

@@ -33,6 +33,8 @@ namespace smartcube
 
 		public:
 			virtual void push(RecordPtr record) = 0;
+
+			virtual void free(RecordPtr rec);
 	};
 
 	typedef Poco::SharedPtr<Output> OutputPtr;

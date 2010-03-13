@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "Expand.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "ExpandApp.h"
 

@@ -15,8 +15,6 @@
  */
 
 #include "Tail.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "TailApp.h"
 

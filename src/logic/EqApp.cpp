@@ -17,8 +17,6 @@
 #include "EqApp.h"
 
 #include "Eq.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "EqApp.h"
 

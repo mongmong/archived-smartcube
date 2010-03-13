@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-#include "RecordPool.h"
+#ifndef DEFAULTAPP_H_
+#define DEFAULTAPP_H_
 
-#include "Input.h"
+#include "ConsoleApp.h"
 
 namespace smartcube
 {
-	Input::Input()
+	class DefaultApp : public ConsoleApp
 	{
-		// TODO Auto-generated constructor stub
+		public:
+			DefaultApp();
+			virtual ~DefaultApp();
 
-	}
+		protected:
+			void defineOptions(Poco::Util::OptionSet& options);
 
-	Input::~Input()
-	{
-		// TODO Auto-generated destructor stub
-	}
+			virtual const std::string getUsage() const;
+			virtual const std::string getHeader() const;
 
-	RecordPtr Input::allocate()
-	{
-		return RecordPool::getInstance().allocate();
-	}
+		protected:
+			int main2(const std::vector<std::string>& args);
+	};
 }
+
+#endif /* DEFAULTAPP_H_ */

@@ -17,8 +17,6 @@
 #include "CmpApp.h"
 
 #include "Cmp.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "CmpApp.h"
 

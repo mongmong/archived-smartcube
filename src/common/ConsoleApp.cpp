@@ -331,15 +331,6 @@ namespace smartcube
 	{
 		std::string inputFieldSpt = config().getString(
 				"smartcube.common.input-field-separators", "\t");
-		std::string inputGroupSpt = config().getString(
-				"smartcube.common.input-group-separators", "\t");
-
-		bool unescape = true;
-		if (config().hasOption("smartcube.common.dont-unescape-input"))
-		{
-			unescape = false;
-		}
-		unescape = false;
 
 		std::vector<InputPtr> inputs;
 		std::vector<std::string>::const_iterator iter = _inputs.begin();
@@ -347,18 +338,18 @@ namespace smartcube
 		{
 			if (*iter == "-")
 			{
-				inputs.push_back(new SimpleInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape));
+				inputs.push_back(new SimpleInput(STDIN_FILENO, inputFieldSpt));
 			}
 			else
 			{
-				inputs.push_back(new SimpleInput(*iter, inputFieldSpt, inputGroupSpt, unescape));
+				inputs.push_back(new SimpleInput(*iter, inputFieldSpt));
 			}
 		}
 
 		switch(inputs.size())
 		{
 			case 0:
-				return new SimpleInput(STDIN_FILENO, inputFieldSpt, inputGroupSpt, unescape);
+				return new SimpleInput(STDIN_FILENO, inputFieldSpt);
 				break;
 			case 1:
 				return inputs[0];
@@ -374,14 +365,6 @@ namespace smartcube
 	{
 		std::string outputFieldSpt = config().getString(
 				"smartcube.common.output-field-separator", "\t");
-		std::string outputGroupSpt = config().getString(
-				"smartcube.common.output-group-separator", "\t");
-		bool escape = true;
-		if (config().hasOption("smartcube.common.dont-escape-output"))
-		{
-			escape = false;
-		}
-		escape = false;
 
 		std::vector<OutputPtr> outputs;
 		std::vector<std::string>::const_iterator iter = _outputs.begin();
@@ -389,18 +372,18 @@ namespace smartcube
 		{
 			if (*iter == "-")
 			{
-				outputs.push_back(new SimpleOutput(STDIN_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape));
+				outputs.push_back(new SimpleOutput(STDIN_FILENO, outputFieldSpt[0]));
 			}
 			else
 			{
-				outputs.push_back(new SimpleOutput(*iter, outputFieldSpt[0], outputGroupSpt[0], escape));
+				outputs.push_back(new SimpleOutput(*iter, outputFieldSpt[0]));
 			}
 		}
 
 		switch(outputs.size())
 		{
 			case 0:
-				return new SimpleOutput(STDOUT_FILENO, outputFieldSpt[0], outputGroupSpt[0], escape);
+				return new SimpleOutput(STDOUT_FILENO, outputFieldSpt[0]);
 				break;
 			case 1:
 				return outputs[0];

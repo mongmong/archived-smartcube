@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "Mul.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "MulApp.h"
 

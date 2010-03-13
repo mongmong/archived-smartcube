@@ -15,8 +15,6 @@
  */
 
 #include "AggAverage.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "AggAverageApp.h"
 

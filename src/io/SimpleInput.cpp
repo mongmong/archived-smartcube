@@ -18,34 +18,24 @@
 
 #include <boost/tokenizer.hpp>
 
-#include "FileInput.h"
+#include "StringUtil.h"
+
+#include "SimpleInput.h"
 
 namespace smartcube
 {
 	SimpleInput::SimpleInput(int fd,
-			const std::string& fieldSeparators,
-			const std::string& groupSeparators,
-			bool unquote) :
-		_ifstream(fd), _fieldEscapedSeparator("\\", fieldSeparators, "\""),
-				_fieldCharSeparator(
-						fieldSeparators.c_str(), "", boost::keep_empty_tokens),
-				_groupSeparator(
-						groupSeparators.c_str(), "", boost::keep_empty_tokens),
-				_unquote(unquote)
+			const std::string& fieldSeparators) :
+		_ifstream(fd),
+		_fieldSeparators(fieldSeparators)
 	{
 		// TODO Auto-generated constructor stub
 	}
 
 	SimpleInput::SimpleInput(const std::string& path,
-			const std::string& fieldSeparators,
-			const std::string& groupSeparators,
-			bool unquote) :
-		_ifstream(path), _fieldEscapedSeparator("\\", fieldSeparators, "\""),
-				_fieldCharSeparator(
-						fieldSeparators.c_str(), "", boost::keep_empty_tokens),
-				_groupSeparator(
-						groupSeparators.c_str(), "", boost::keep_empty_tokens),
-				_unquote(unquote)
+			const std::string& fieldSeparators) :
+			_ifstream(path),
+			_fieldSeparators(fieldSeparators)
 	{
 	}
 
@@ -58,10 +48,11 @@ namespace smartcube
 	{
 		std::string line;
 
-		RecordPtr rec(new Record());
+		RecordPtr rec(this->allocate());
 
 		while (rec->empty() && std::getline(_ifstream, line))
 		{
+			/*
 			if (_unquote)
 			{
 				boost::tokenizer<boost::escaped_list_separator<char> > tokens(
@@ -74,6 +65,9 @@ namespace smartcube
 						line, _fieldCharSeparator);
 				rec->insert(rec->end(), tokens.begin(), tokens.end());
 			}
+			*/
+
+			StringUtil::splite<Record>(line, _fieldSeparators, *rec);
 		}
 
 		return rec;

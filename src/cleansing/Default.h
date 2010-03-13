@@ -17,11 +17,22 @@
 #ifndef DEFAULT_H_
 #define DEFAULT_H_
 
-class Default
+#include "Routine.h"
+
+namespace smartcube
 {
-	public:
-		Default();
-		virtual ~Default();
-};
+	class Default : public Routine
+	{
+		public:
+			Default(const std::vector<Poco::DynamicAny>& defaults);
+			virtual ~Default();
+
+		public:
+			void handle(Input& input, Output& output);
+
+		private:
+			std::vector<Poco::DynamicAny> _defaults;
+	};
+}
 
 #endif /* DEFAULT_H_ */

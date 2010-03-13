@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "Log.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "LogApp.h"
 

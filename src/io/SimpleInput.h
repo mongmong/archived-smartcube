@@ -38,8 +38,8 @@ namespace smartcube
 	class SimpleInput: public Input
 	{
 		public:
-			SimpleInput(int fd, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
-			SimpleInput(const std::string& path, const std::string& fieldSeparators = "\t", const std::string& groupSeparators = ",", bool unquote = false);
+			SimpleInput(int fd, const std::string& fieldSeparators = "\t");
+			SimpleInput(const std::string& path, const std::string& fieldSeparators = "\t");
 			virtual ~SimpleInput();
 
 		public:
@@ -48,10 +48,7 @@ namespace smartcube
 		private:
 			boost::iostreams::stream<boost::iostreams::file_descriptor_source>
 					_ifstream;
-			boost::escaped_list_separator<char> _fieldEscapedSeparator;
-			boost::char_separator<char> _fieldCharSeparator;
-			boost::char_separator<char> _groupSeparator;
-			bool	_unquote;
+			std::string 	_fieldSeparators;
 	};
 }
 

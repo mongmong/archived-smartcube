@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-#include "RecordPool.h"
+#ifndef HTTPINPUT_H_
+#define HTTPINPUT_H_
 
 #include "Input.h"
 
 namespace smartcube
 {
-	Input::Input()
+	/**
+	 * HttpInput
+	 *
+	 * Read via HTTP protocol.
+	 */
+	class HttpInput : Input
 	{
-		// TODO Auto-generated constructor stub
+		public:
+			HttpInput();
+			virtual ~HttpInput();
 
-	}
-
-	Input::~Input()
-	{
-		// TODO Auto-generated destructor stub
-	}
-
-	RecordPtr Input::allocate()
-	{
-		return RecordPool::getInstance().allocate();
-	}
+		public:
+			RecordPtr pop();
+	};
 }
+
+#endif /* HTTPINPUT_H_ */

@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "ReFormat.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "ReFormatApp.h"
 

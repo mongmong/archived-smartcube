@@ -37,8 +37,8 @@ namespace smartcube
 	class SimpleOutput : public Output
 	{
 		public:
-			SimpleOutput(int fd, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
-			SimpleOutput(const std::string& path, char fieldSeparator = '\t', char groupSeparator = ',', bool quote = false);
+			SimpleOutput(int fd, char fieldSeparator = '\t');
+			SimpleOutput(const std::string& path, char fieldSeparator = '\t');
 			virtual ~SimpleOutput();
 
 		public:
@@ -47,10 +47,6 @@ namespace smartcube
 		private:
 			boost::iostreams::stream<boost::iostreams::file_descriptor_sink>	_ofstream;
 			char						_fieldSeparator;
-			char						_groupSeparator;
-			bool						_quote;
-
-			boost::regex				_regex;
 	};
 }
 

@@ -15,8 +15,6 @@
  */
 
 #include "Xor.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "XorApp.h"
 

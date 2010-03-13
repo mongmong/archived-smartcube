@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "RecordPool.h"
+
 #include "Output.h"
 
 namespace smartcube
@@ -27,5 +29,10 @@ namespace smartcube
 	Output::~Output()
 	{
 		// TODO Auto-generated destructor stub
+	}
+
+	void Output::free(RecordPtr rec)
+	{
+		RecordPool::getInstance().free(rec);
 	}
 }

@@ -6,35 +6,21 @@ cmake_minimum_required(VERSION 2.6)
     
 # xgroup
 add_library(xcommon
-    ../common/ConsoleApp.h
-    ../common/ConsoleApp.cpp
-    ../common/DummyInput.h
-    ../common/DummyInput.cpp
-    ../common/DummyOutput.h
-    ../common/DummyOutput.cpp
-    ../common/Error.h
-    ../common/Error.cpp
-    ../common/FileInput.h
-    ../common/FileInput.cpp
-    ../common/FileOutput.h
-    ../common/FileOutput.cpp
-    ../common/ForkOutput.h
-    ../common/ForkOutput.cpp
-    ../common/Input.h
-    ../common/Input.cpp
-    ../common/JoinInput.h
-    ../common/JoinInput.cpp
-    ../common/MemoryInput.h
-    ../common/MemoryInput.cpp
-    ../common/MemoryOutput.h
-    ../common/MemoryOutput.cpp
-    ../common/Output.h
-    ../common/Output.cpp
-    ../common/Routine.h
-    ../common/Routine.cpp
-    ../common/Record.h
-    ../common/Record.cpp
-    ../common/SharedQueue.h
-    ../common/SharedQueue.cpp
+    ConsoleApp.h
+    ConsoleApp.cpp
+    Error.h
+    Error.cpp
+    Input.h
+    Input.cpp
+    Output.h
+    Output.cpp
+    Routine.h
+    Routine.cpp
+    Record.h
+    Record.cpp
+    RecordPool.h
+    RecordPool.cpp
+    SharedQueue.h
+    SharedQueue.cpp
     )
     

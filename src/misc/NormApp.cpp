@@ -15,8 +15,6 @@
  */
 
 #include "Norm.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "NormApp.h"
 

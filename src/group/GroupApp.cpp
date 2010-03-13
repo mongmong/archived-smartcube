@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "Group.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "GroupApp.h"
 

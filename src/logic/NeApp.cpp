@@ -17,8 +17,6 @@
 #include "NeApp.h"
 
 #include "Ne.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "NeApp.h"
 

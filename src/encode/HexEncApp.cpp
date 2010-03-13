@@ -15,8 +15,6 @@
  */
 
 #include "HexEnc.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "HexEncApp.h"
 

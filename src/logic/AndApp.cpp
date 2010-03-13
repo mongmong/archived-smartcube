@@ -15,8 +15,6 @@
  */
 
 #include "And.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "AndApp.h"
 

@@ -15,8 +15,6 @@
  */
 
 #include "Base64Enc.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "Base64EncApp.h"
 

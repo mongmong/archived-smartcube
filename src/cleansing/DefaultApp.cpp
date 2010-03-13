@@ -14,53 +14,52 @@
  * limitations under the License.
  */
 
-#include "HexDec.h"
+#include <Poco/DynamicAny.h>
 
-#include "HexDecApp.h"
+#include "Default.h"
+
+#include "DefaultApp.h"
 
 namespace smartcube
 {
-	HexDecApp::HexDecApp()
+	DefaultApp::DefaultApp()
 	{
-		// TODO Auto-generated constructor stub
-
 	}
 
-	HexDecApp::~HexDecApp()
+	DefaultApp::~DefaultApp()
 	{
-		// TODO Auto-generated destructor stub
 	}
 
-	void HexDecApp::defineOptions(Poco::Util::OptionSet& options)
+	void DefaultApp::defineOptions(Poco::Util::OptionSet& options)
 	{
 		ConsoleApp::defineOptions(options);
 	}
 
-	const std::string HexDecApp::getUsage() const
+	const std::string DefaultApp::getUsage() const
 	{
-		return "[OPTIONS] [--] <column> [<column> ...]";
+		return "[OPTIONS] [--] <default> [<default> ...]";
 	}
 
-	const std::string HexDecApp::getHeader() const
+	const std::string DefaultApp::getHeader() const
 	{
-		return "Decode hex encoded columns, resulting in new columns.";
+		return "Fill default values.";
 	}
 
-	int HexDecApp::main2(const std::vector<std::string>& args)
+	int DefaultApp::main2(const std::vector<std::string>& args)
 	{
-		std::vector<std::size_t> columns;
+		std::vector<Poco::DynamicAny> columns;
 
 		std::vector<std::string>::const_iterator iter = args.begin();
 		for (; iter != args.end(); ++iter)
 		{
-			columns.push_back(Poco::DynamicAny(*iter).convert<std::size_t>());
+			columns.push_back(*iter);
 		}
 
-		HexDec dec(columns);
-		dec.handle(*getInput(), *getOutput());
+		Default Default(columns);
+		Default.handle(*getInput(), *getOutput());
 
 		return Poco::Util::Application::EXIT_OK;
 	}
 }
 
-POCO_APP_MAIN(smartcube::HexDecApp);
+POCO_APP_MAIN(smartcube::DefaultApp);

@@ -17,8 +17,6 @@
 #include "SubstrApp.h"
 
 #include "Substr.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "SubstrApp.h"
 

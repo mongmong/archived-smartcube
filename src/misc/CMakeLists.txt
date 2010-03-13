@@ -17,14 +17,14 @@ target_link_libraries(xnorm
     )
 
 # xmisc.tablecomparer
-add_executable(xmisc.tablecomparer
-    ${COMMON_SRCS}
-    TableComparer.h
-    TableComparer.cpp
-    TableComparerApp.h
-    TableComparerApp.cpp
-    )
-target_link_libraries(xmisc.tablecomparer
-    ${COMMON_LIBS}
-    )
+#add_executable(xmisc.tablecomparer
+#    ${COMMON_SRCS}
+#    TableComparer.h
+#    TableComparer.cpp
+#    TableComparerApp.h
+#    TableComparerApp.cpp
+#    )
+#target_link_libraries(xmisc.tablecomparer
+#    ${COMMON_LIBS}
+#    )
   

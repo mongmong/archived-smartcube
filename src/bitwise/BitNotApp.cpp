@@ -15,8 +15,6 @@
  */
 
 #include "BitNot.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "BitNotApp.h"
 

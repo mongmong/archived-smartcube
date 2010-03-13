@@ -20,22 +20,20 @@
 #include <Poco/String.h>
 #include <Poco/NumberFormatter.h>
 
-#include "FileOutput.h"
+#include "SimpleOutput.h"
 
 namespace smartcube
 {
-	SimpleOutput::SimpleOutput(int fd, char fieldSeparator, char groupSeparator, bool quote) :
-		_ofstream(fd), _fieldSeparator(fieldSeparator), _groupSeparator(groupSeparator), _quote(quote),
-		_regex("([\\\\ \\\"])")
+	SimpleOutput::SimpleOutput(int fd, char fieldSeparator) :
+		_ofstream(fd), _fieldSeparator(fieldSeparator)
 	{
 		// TODO Auto-generated constructor stub
 
 	}
 
 	SimpleOutput::SimpleOutput(
-			const std::string& path, char fieldSeparator, char groupSeparator, bool quote) :
-		_ofstream(path), _fieldSeparator(fieldSeparator), _groupSeparator(groupSeparator), _quote(quote),
-		_regex("([\\\\ \\\"])")
+			const std::string& path, char fieldSeparator) :
+		_ofstream(path), _fieldSeparator(fieldSeparator)
 	{
 	}
 
@@ -57,6 +55,7 @@ namespace smartcube
 				oss << _fieldSeparator;
 			}
 
+			/*
 			if (iter->isArray())
 			{
 				typedef std::vector<Poco::DynamicAny> VecType;
@@ -72,10 +71,7 @@ namespace smartcube
 					if (_quote)
 					{
 						const std::string& origin = static_cast<const std::string&>(*iter);
-						/*
-						std::string modified = boost::replace_all_copy(
-								static_cast<const std::string&> (*iter), "\"", "\\\"");
-								*/
+
 						std::string modified = boost::regex_replace(origin, _regex, "\\\\$1", boost::match_default | boost::format_all);
 						if (modified.length() != origin.length())
 						{
@@ -94,15 +90,13 @@ namespace smartcube
 
 				continue;
 			}
+			*/
 
+			/*
 			if (_quote)
 			{
 				const std::string& origin = static_cast<const std::string&>(*iter);
-				/*
-				 *
-				std::string modified = boost::replace_all_copy(
-						static_cast<const std::string&> (*iter), "\"", "\\\"");
-						*/
+
 				std::string modified = boost::regex_replace(origin, _regex, "\\\\$1", boost::match_default | boost::format_all);
 				if (modified.length() != origin.length())
 				{
@@ -117,8 +111,13 @@ namespace smartcube
 			{
 				oss << static_cast<const std::string&> (*iter);
 			}
+			*/
+
+			oss << static_cast<const std::string&> (*iter);
 		}
 
 		_ofstream << oss.str() << std::endl;
+
+		this->free(record);
 	}
 }

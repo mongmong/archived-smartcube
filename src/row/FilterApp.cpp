@@ -17,8 +17,6 @@
 #include <Poco/DynamicAny.h>
 
 #include "Filter.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "FilterApp.h"
 

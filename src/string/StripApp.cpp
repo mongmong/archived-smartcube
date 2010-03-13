@@ -17,8 +17,6 @@
 #include "StripApp.h"
 
 #include "Strip.h"
-#include "FileInput.h"
-#include "FileOutput.h"
 
 #include "StripApp.h"
 

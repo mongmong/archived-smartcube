@@ -16,13 +16,44 @@
 
 #include "Default.h"
 
-Default::Default()
+namespace smartcube
 {
-	// TODO Auto-generated constructor stub
+	Default::Default(const std::vector<Poco::DynamicAny>& defaults) :
+		_defaults(defaults)
+	{
+	}
 
-}
+	Default::~Default()
+	{
+	}
 
-Default::~Default()
-{
-	// TODO Auto-generated destructor stub
+	void Default::handle(Input& input, Output& output)
+	{
+		RecordPtr rec = input.pop();
+
+		for (; !rec->eof(); output.push(rec), rec = input.pop())
+		{
+			std::vector<Poco::DynamicAny>::iterator iter = _defaults.begin();
+			for (; iter != _defaults.end(); ++iter)
+			{
+				std::size_t i = iter - _defaults.begin();
+				if (rec->size() <= i)
+				{
+					rec->push_back(*iter);
+				}
+				else if ((*rec)[i].isEmpty())
+				{
+					(*rec)[i] = *iter;
+				}
+				else if ((*rec)[i].isString() && static_cast<const std::string&>((*rec)[i]).length() == 0)
+				{
+					(*rec)[i] = *iter;
+				}
+				else
+				{
+					// TODO: check array elements.
+				}
+			}
+		}
+	}
 }

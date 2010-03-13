@@ -32,30 +32,28 @@ namespace smartcube
 		RecordPtr rec = input.pop();
 
 		std::size_t size = _columns.size() / 3;
-		if (size > 0)
+		for (; !rec->eof(); output.push(rec), rec = input.pop())
 		{
-			for (; !rec->eof(); output.push(rec), rec = input.pop())
+			std::size_t s = rec->size();
+			rec->resize(s + size);
+
+			std::size_t i = 0;
+			for (; i < size; ++i)
 			{
-				std::size_t s = rec->size();
-				rec->resize(s + size);
+				std::size_t x = _columns[3 * i + 0];
+				std::size_t y = _columns[3 * i + 1];
+				std::size_t z = _columns[3 * i + 2];
+				std::size_t index = s + i;
 
-				std::size_t i = 0;
-				for (; i < size; ++i)
+				Poco::DynamicAny& any = (*rec)[x];
+				if (!static_cast<bool> (any))
 				{
-					std::size_t x = _columns[3 * i + 0];
-					std::size_t y = _columns[3 * i + 1];
-					std::size_t z = _columns[3 * i + 2];
-					std::size_t index = s + i;
-
-					Poco::DynamicAny& any = (*rec)[x];
-					if (!static_cast<bool>(any))
-					{
-						y = z;
-					}
-
-					(*rec)[index] = (*rec)[y];
+					y = z;
 				}
+
+				(*rec)[index] = (*rec)[y];
 			}
+
 		}
 	}
 }
