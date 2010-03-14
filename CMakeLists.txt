@@ -16,6 +16,7 @@ set(COMMON_LIBS
     PocoFoundation
     boost_iostreams
     boost_regex
+	tcmalloc
     )
     
 add_subdirectory(src)

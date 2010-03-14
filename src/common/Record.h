@@ -22,11 +22,14 @@
 
 #include <Poco/SharedPtr.h>
 #include <Poco/DynamicAny.h>
+#include <Poco/Data/RecordSet.h>
 
 #include "Error.h"
 
 namespace smartcube
 {
+	typedef Poco::DynamicAny Cell;
+	typedef Poco::SharedPtr<Cell> CellPtr;
 
 	class Record: public std::vector<Poco::DynamicAny>
 	{
@@ -57,6 +60,7 @@ namespace smartcube
 		public:
 			inline Poco::DynamicAny& operator [](std::size_t index)
 			{
+				/*
 				if (index > 1000)
 				{
 					if (1000 - (int) index < -static_cast<int> (size()))
@@ -65,7 +69,7 @@ namespace smartcube
 					}
 					return end()[1000 - (int) index];
 				}
-				else
+				else*/
 				{
 					if (index >= size())
 					{
@@ -77,6 +81,7 @@ namespace smartcube
 
 			inline const Poco::DynamicAny& operator[] (std::size_t index) const
 			{
+				/*
 				if (index > 1000)
 				{
 					if (1000 - (int) index < -static_cast<int> (size()))
@@ -85,7 +90,7 @@ namespace smartcube
 					}
 					return end()[1000 - (int) index];
 				}
-				else
+				else*/
 				{
 					if (index >= size())
 					{
