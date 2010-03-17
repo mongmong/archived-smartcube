@@ -52,6 +52,8 @@ namespace smartcube
 				_output->push(rec);
 			}
 
+			python::object getOutputs();
+
 		private:
 			DummyOutput _dummyOutput;
 			Output* _output;

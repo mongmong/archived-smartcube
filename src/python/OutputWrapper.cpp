@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#include "ForkOutput.h"
+#include "Module.h"
+
 #include "OutputWrapper.h"
 
 namespace smartcube
@@ -37,4 +40,27 @@ namespace smartcube
 		_output = &output;
 	}
 
+	python::object OutputWrapper::getOutputs()
+	{
+		python::list obj;
+
+		ForkOutput* foutput = dynamic_cast<ForkOutput*> (_output);
+
+		if (NULL != foutput)
+		{
+			std::vector<OutputPtr>& outputs = foutput->getOutputs();
+			std::vector<OutputPtr>::iterator iter = outputs.begin();
+
+			for (; iter != outputs.end(); ++iter)
+			{
+				python::object o = Module::OutputWrapper();
+				OutputWrapper& owrapper = python::extract<OutputWrapper&>(o);
+				owrapper.wrap(**iter);
+
+				obj.append(o);
+			}
+		}
+
+		return obj;
+	}
 }

@@ -54,6 +54,7 @@ namespace smartcube
 		OutputWrapper =
 				python::class_<smartcube::OutputWrapper, boost::noncopyable>("OutputWrapper")
 				.def("push", &smartcube::OutputWrapper::push2)
+				.def("get_outputs", &smartcube::OutputWrapper::getOutputs)
 				;
 
 		/*

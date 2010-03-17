@@ -9,7 +9,6 @@ import smartcube
 
 class SampleRoutine(smartcube.Routine):
     '''
-    SampleRoutine
     '''
     def __init__(self, options, args):
         super(SampleRoutine, self).__init__()
@@ -20,6 +19,8 @@ class SampleRoutine(smartcube.Routine):
     def handle(self, input, output):
         print input.get_inputs()
         input = input.get_inputs()[1]
+        print output.get_outputs()
+        output = output.get_outputs()[1]
         linenum = 1
         a = input.pop()
         count = 0;
@@ -34,6 +35,5 @@ class SampleRoutine(smartcube.Routine):
 
 
 __routine__ = SampleRoutine
-
 
 # vim:expandtab
