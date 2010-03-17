@@ -18,7 +18,7 @@
 
 namespace smartcube
 {
-	Default::Default(const std::vector<Poco::DynamicAny>& defaults) :
+	Default::Default(const std::vector<Cell>& defaults) :
 		_defaults(defaults)
 	{
 	}
@@ -33,7 +33,7 @@ namespace smartcube
 
 		for (; !rec->eof(); output.push(rec), rec = input.pop())
 		{
-			std::vector<Poco::DynamicAny>::iterator iter = _defaults.begin();
+			std::vector<Cell>::iterator iter = _defaults.begin();
 			for (; iter != _defaults.end(); ++iter)
 			{
 				std::size_t i = iter - _defaults.begin();
@@ -41,17 +41,9 @@ namespace smartcube
 				{
 					rec->push_back(*iter);
 				}
-				else if ((*rec)[i].isEmpty())
+				else if ((*rec)[i].type() == typeid(std::string) && static_cast<const std::string&>((*rec)[i]).length() == 0)
 				{
 					(*rec)[i] = *iter;
-				}
-				else if ((*rec)[i].isString() && static_cast<const std::string&>((*rec)[i]).length() == 0)
-				{
-					(*rec)[i] = *iter;
-				}
-				else
-				{
-					// TODO: check array elements.
 				}
 			}
 		}

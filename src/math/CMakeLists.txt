@@ -125,3 +125,13 @@ target_link_libraries(xmath.exp
     ${COMMON_LIBS}
     )
     
+add_executable(xmath.sign
+    Sign.h
+    Sign.cpp
+    SignApp.h
+    SignApp.cpp
+    )
+target_link_libraries(xmath.sign
+    ${COMMON_LIBS}
+    )
+    

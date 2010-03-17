@@ -38,7 +38,7 @@ namespace smartcube
 			return;
 		}
 
-		long count = 1;
+		int64_t count = 1;
 		std::size_t index = 0;
 
 		RecordPtr current = input.pop();

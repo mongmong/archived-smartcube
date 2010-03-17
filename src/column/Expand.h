@@ -26,14 +26,14 @@ namespace smartcube
 	class Expand : public Routine
 	{
 		public:
-			Expand(const std::vector<std::string>& columns);
+			Expand(const std::vector<Cell>& columns);
 			virtual ~Expand();
 
 		public:
 			virtual void handle(Input& input, Output& output);
 
 		private:
-			std::vector<std::string>	_columns;
+			std::vector<Cell>	_columns;
 	};
 }
 

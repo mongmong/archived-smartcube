@@ -39,8 +39,8 @@ namespace smartcube
 			}
 
 		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
+			inline void operator()(const Cell& op,
+					Cell& out)
 			{
 				switch (_option)
 				{

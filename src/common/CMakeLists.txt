@@ -6,6 +6,8 @@ cmake_minimum_required(VERSION 2.6)
     
 # xgroup
 add_library(xcommon
+    Cell.h
+    Cell.cpp
     ConsoleApp.h
     ConsoleApp.cpp
     Error.h
@@ -22,5 +24,14 @@ add_library(xcommon
     RecordPool.cpp
     SharedQueue.h
     SharedQueue.cpp
+    )
+    
+add_executable(testcompare
+    TestCompare.cpp
+    )
+    
+target_link_libraries(testcompare
+    xcommon
+    ${COMMON_LIBS}
     )
     

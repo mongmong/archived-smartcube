@@ -49,6 +49,8 @@ namespace smartcube
 			boost::iostreams::stream<boost::iostreams::file_descriptor_source>
 					_ifstream;
 			std::string 	_fieldSeparators;
+
+			std::string		_line;
 	};
 }
 

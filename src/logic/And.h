@@ -26,9 +26,7 @@ namespace smartcube
 	class AndOp
 	{
 		public:
-			inline void operator ()(const Poco::DynamicAny& op1,
-					const Poco::DynamicAny& op2,
-					Poco::DynamicAny& out)
+			inline void operator ()(const Cell& op1, const Cell& op2, Cell& out)
 			{
 				out = static_cast<bool> (op1) && static_cast<bool> (op2);
 			}

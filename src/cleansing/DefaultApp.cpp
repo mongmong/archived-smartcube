@@ -47,7 +47,7 @@ namespace smartcube
 
 	int DefaultApp::main2(const std::vector<std::string>& args)
 	{
-		std::vector<Poco::DynamicAny> columns;
+		std::vector<Cell> columns;
 
 		std::vector<std::string>::const_iterator iter = args.begin();
 		for (; iter != args.end(); ++iter)

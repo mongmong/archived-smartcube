@@ -123,6 +123,7 @@ namespace smartcube
 						false).repeatable(false).argument("sep") .binding(
 						"smartcube.common.output-field-separator"));
 
+		/*
 		options.addOption(
 				Poco::Util::Option(
 						"igsep", "",
@@ -146,6 +147,7 @@ namespace smartcube
 				"dont-unescape-input", "", "unquote input fields.") .required(
 				false).repeatable(false).binding(
 				"smartcube.common.dont-unescape-input"));
+				*/
 	}
 
 	void ConsoleApp::handleHelp(const std::string& name,

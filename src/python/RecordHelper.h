@@ -30,7 +30,7 @@ namespace smartcube
 	class RecordHelper
 	{
 		public:
-			static python::list vectorToPythonList(const std::vector<Poco::DynamicAny>& vector);
+			static python::list vectorToPythonList(const std::vector<Cell>& vector);
 			static python::list recordToPythonList(RecordPtr rec);
 
 			static Poco::SharedPtr<DynamicAny> pythonObjectToAny(python::object obj);

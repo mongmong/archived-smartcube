@@ -21,8 +21,6 @@
 
 #include <boost/python.hpp>
 
-#include "RecordHelper.h"
-
 #include "Output.h"
 #include "DummyOutput.h"
 
@@ -47,7 +45,11 @@ namespace smartcube
 			inline void push2(python::object obj)
 			{
 				// std::cout << "OutputWrapper::push2() called." << std::endl;
-				_output->push(RecordHelper::pythonListToRecord(obj));
+				RecordPtr rec = new Record();
+				*rec = obj;
+				//std::cout << "OutputWrapper::push2() after *rec = obj." << std::endl;
+				// _output->push(RecordHelper::pythonListToRecord(obj));
+				_output->push(rec);
 			}
 
 		private:

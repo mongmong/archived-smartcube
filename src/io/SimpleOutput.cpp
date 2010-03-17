@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <sstream>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <Poco/String.h>
@@ -29,6 +28,7 @@ namespace smartcube
 	{
 		// TODO Auto-generated constructor stub
 
+		_tmp.reserve(1024);
 	}
 
 	SimpleOutput::SimpleOutput(
@@ -44,79 +44,29 @@ namespace smartcube
 
 	void SimpleOutput::push(RecordPtr record)
 	{
-
-		std::ostringstream oss;
+		_tmp.clear();
+		//std::ostringstream oss;
 
 		Record::iterator iter = record->begin();
 		for (; iter != record->end(); ++iter)
 		{
 			if (iter != record->begin())
 			{
-				oss << _fieldSeparator;
+				_tmp.append(1, _fieldSeparator);
+				// oss << _fieldSeparator;
 			}
 
-			/*
-			if (iter->isArray())
-			{
-				typedef std::vector<Poco::DynamicAny> VecType;
-				const VecType& anys = iter->extract<VecType>();
-				std::vector<Poco::DynamicAny>::const_iterator iter = anys.begin();
-				for (; iter != anys.end(); ++iter)
-				{
-					if (iter != anys.begin())
-					{
-						oss << _groupSeparator;
-					}
-
-					if (_quote)
-					{
-						const std::string& origin = static_cast<const std::string&>(*iter);
-
-						std::string modified = boost::regex_replace(origin, _regex, "\\\\$1", boost::match_default | boost::format_all);
-						if (modified.length() != origin.length())
-						{
-							oss << '"' << modified << '"';
-						}
-						else
-						{
-							oss << origin;
-						}
-					}
-					else
-					{
-						oss << static_cast<const std::string&> (*iter);
-					}
-				}
-
-				continue;
-			}
-			*/
-
-			/*
-			if (_quote)
-			{
-				const std::string& origin = static_cast<const std::string&>(*iter);
-
-				std::string modified = boost::regex_replace(origin, _regex, "\\\\$1", boost::match_default | boost::format_all);
-				if (modified.length() != origin.length())
-				{
-					oss << '"' << modified << '"';
-				}
-				else
-				{
-					oss << origin;
-				}
-			}
-			else
-			{
-				oss << static_cast<const std::string&> (*iter);
-			}
-			*/
-
-			oss << static_cast<const std::string&> (*iter);
+			//std::cout << static_cast<const std::string&>(*iter);
+			_tmp.append(static_cast<const std::string&>(*iter));
+			// oss << static_cast<const std::string&> (*iter);
+			//oss << iter.base();
 		}
 
-		_ofstream << oss.str() << std::endl;
+		_tmp.append(1, '\n');
+
+		_ofstream << _tmp;
+
+		// _ofstream << oss.str() << std::endl;
 
 		this->free(record);
 	}

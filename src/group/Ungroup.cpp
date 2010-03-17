@@ -38,7 +38,7 @@ namespace smartcube
 		typedef std::vector<Poco::SharedPtr<Poco::StringTokenizer> >
 				TokenizerType;
 		TokenizerType tokenizers;
-		typedef std::vector<Poco::DynamicAny> ResultType;
+		typedef std::vector<Cell> ResultType;
 		ResultType results;
 
 		tokenizers.resize(_columns.size());
@@ -77,7 +77,7 @@ namespace smartcube
 					}
 					else
 					{
-						(*ptr)[s] = "";
+						(*ptr)[s] = std::string("");
 					}
 				} // for tokenizer
 

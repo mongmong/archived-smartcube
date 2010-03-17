@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#include <Poco/DynamicAny.h>
-
 #include "Round.h"
 
 #include "RoundApp.h"

@@ -45,8 +45,8 @@ namespace smartcube
 			}
 
 		public:
-			inline bool operator ()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
+			inline bool operator ()(const Cell& op,
+					Cell& out)
 			{
 				boost::smatch parts;
 

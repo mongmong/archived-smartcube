@@ -19,76 +19,79 @@
 
 #include <string>
 
-class StringUtil
+namespace smartcube
 {
-	public:
-		template<typename ArrayType>
-		static void StringUtil::splite(const std::string& s,
-				char delimiter,
-				ArrayType& parts)
-		{
-			parts.reserve(64);
-
-			std::string::const_iterator start = s.begin();
-			std::string::const_iterator end = s.end();
-			std::string::const_iterator iter = s.begin();
-
-			for (; iter != end; iter++)
+	class StringUtil
+	{
+		public:
+			template<typename ArrayType>
+			static void StringUtil::split(const std::string& s,
+					char delimiter,
+					ArrayType& parts)
 			{
-				if (*iter == delimiter)
+				parts.reserve(64);
+
+				std::string::const_iterator start = s.begin();
+				std::string::const_iterator end = s.end();
+				std::string::const_iterator iter = s.begin();
+
+				for (; iter != end; iter++)
+				{
+					if (*iter == delimiter)
+					{
+						parts.push_back(std::string(start, iter));
+
+						start = iter + 1;
+					}
+				}
+
+				if (start != end)
 				{
 					parts.push_back(std::string(start, iter));
-
-					start = iter + 1;
+				}
+				else
+				{
+					parts.push_back(std::string(""));
 				}
 			}
 
-			if (start != end)
+			template<typename ArrayType>
+			static void StringUtil::split(const std::string& s,
+					const std::string& delimiters,
+					ArrayType& parts)
 			{
-				parts.push_back(std::string(start, iter));
-			}
-			else
-			{
-				parts.push_back("");
-			}
-		}
+				if (delimiters.size() == 1)
+				{
+					return split<ArrayType> (s, delimiters[0], parts);
+				}
 
-		template<typename ArrayType>
-		static void StringUtil::splite(const std::string& s,
-				const std::string& delimiters,
-				ArrayType& parts)
-		{
-			if (delimiters.size() == 1)
-			{
-				return splite<ArrayType>(s, delimiters[0], parts);
-			}
+				parts.reserve(64);
 
-			parts.reserve(64);
+				std::string::const_iterator start = s.begin();
+				std::string::const_iterator end = s.end();
+				std::string::const_iterator iter = s.begin();
 
-			std::string::const_iterator start = s.begin();
-			std::string::const_iterator end = s.end();
-			std::string::const_iterator iter = s.begin();
+				for (; iter != end; iter++)
+				{
+					if (delimiters.find(*iter) != std::string::npos)
+					{
+						parts.push_back(std::string(start, iter));
 
-			for (; iter != end; iter++)
-			{
-				if (delimiters.find(*iter) != std::string::npos)
+						start = iter + 1;
+					}
+				}
+
+				if (start != end)
 				{
 					parts.push_back(std::string(start, iter));
-
-					start = iter + 1;
+				}
+				else
+				{
+					parts.push_back(std::string(""));
 				}
 			}
 
-			if (start != end)
-			{
-				parts.push_back(std::string(start, iter));
-			}
-			else
-			{
-				parts.push_back("");
-			}
-		}
-
-};
+	};
+}
 
 #endif /* STRINGUTIL_H_ */

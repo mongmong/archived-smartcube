@@ -47,8 +47,8 @@ namespace smartcube
 						for (; iter != _columns.end(); ++iter)
 						{
 							std::size_t index = s + iter - _columns.begin();
-							Poco::DynamicAny& op = (*rec)[*iter];
-							Poco::DynamicAny& out = (*rec)[index];
+							Cell& op = (*rec)[*iter];
+							Cell& out = (*rec)[index];
 
 							dynamic_cast<Type&> (*this)(op, out);
 						}
@@ -88,9 +88,9 @@ namespace smartcube
 							std::size_t y = _columns[2 * i + 1];
 							std::size_t index = s + i;
 
-							const Poco::DynamicAny& op1 = (*rec)[x];
-							const Poco::DynamicAny& op2 = (*rec)[y];
-							Poco::DynamicAny& out = (*rec)[index];
+							const Cell& op1 = (*rec)[x];
+							const Cell& op2 = (*rec)[y];
+							Cell& out = (*rec)[index];
 
 							dynamic_cast<Type&> (*this)(op1, op2, out);
 						}

@@ -21,8 +21,6 @@
 
 #include <boost/python.hpp>
 
-#include "RecordHelper.h"
-
 #include "Input.h"
 #include "DummyInput.h"
 
@@ -47,7 +45,16 @@ namespace smartcube
 			inline python::object pop2()
 			{
 				// std::cout << "InputWrapper::pop2() called." << std::endl;
-				return RecordHelper::recordToPythonList(_input->pop());
+
+				RecordPtr rec = pop();
+				python::list obj;
+
+				Record::iterator iter = rec->begin();
+				for (; iter != rec->end(); ++iter)
+				{
+					obj.append(static_cast<const python::object&>(*iter));
+				}
+				return obj;
 			}
 
 		private:

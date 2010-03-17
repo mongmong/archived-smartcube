@@ -33,6 +33,7 @@ namespace smartcube
 
 	RecordPtr Input::allocate()
 	{
-		return RecordPool::getInstance().allocate();
+		return new Record();
+		//return RecordPool::getInstance().allocate();
 	}
 }

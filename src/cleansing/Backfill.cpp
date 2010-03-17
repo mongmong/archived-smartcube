@@ -45,7 +45,7 @@ namespace smartcube
 				std::size_t z = _columns[3 * i + 2];
 				std::size_t index = s + i;
 
-				Poco::DynamicAny& any = (*rec)[x];
+				Cell& any = (*rec)[x];
 				if (!static_cast<bool> (any))
 				{
 					y = z;

@@ -24,14 +24,14 @@ namespace smartcube
 	class Default : public Routine
 	{
 		public:
-			Default(const std::vector<Poco::DynamicAny>& defaults);
+			Default(const std::vector<Cell>& defaults);
 			virtual ~Default();
 
 		public:
 			void handle(Input& input, Output& output);
 
 		private:
-			std::vector<Poco::DynamicAny> _defaults;
+			std::vector<Cell> _defaults;
 	};
 }
 

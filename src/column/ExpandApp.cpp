@@ -50,12 +50,12 @@ namespace smartcube
 
 	int ExpandApp::main2(const std::vector<std::string>& args)
 	{
-		std::vector<std::string> columns;
+		std::vector<Cell> columns;
 
 		std::vector<std::string>::const_iterator iter = args.begin();
 		for (; iter != args.end(); ++iter)
 		{
-			columns.push_back(Poco::DynamicAny(*iter).convert<std::string>());
+			columns.push_back(*iter);
 		}
 
 		Expand select(columns);

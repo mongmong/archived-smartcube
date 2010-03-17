@@ -16,13 +16,6 @@
 
 #include "Sign.h"
 
-Sign::Sign()
+namespace smartcube
 {
-	// TODO Auto-generated constructor stub
-
-}
-
-Sign::~Sign()
-{
-	// TODO Auto-generated destructor stub
 }

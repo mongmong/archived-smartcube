@@ -19,6 +19,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include <boost/iostreams/device/file_descriptor.hpp>
 #include <boost/iostreams/stream.hpp>
@@ -47,6 +48,8 @@ namespace smartcube
 		private:
 			boost::iostreams::stream<boost::iostreams::file_descriptor_sink>	_ofstream;
 			char						_fieldSeparator;
+
+			std::string		_tmp;
 	};
 }
 

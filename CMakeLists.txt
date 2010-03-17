@@ -16,6 +16,8 @@ set(COMMON_LIBS
     PocoFoundation
     boost_iostreams
     boost_regex
+    boost_python
+    python2.6
 	tcmalloc
     )
     

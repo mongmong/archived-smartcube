@@ -67,7 +67,7 @@ namespace smartcube
 			}
 			*/
 
-			StringUtil::splite<Record>(line, _fieldSeparators, *rec);
+			StringUtil::split<Record>(line, _fieldSeparators, *rec);
 		}
 
 		return rec;

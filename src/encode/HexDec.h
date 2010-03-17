@@ -29,8 +29,8 @@ namespace smartcube
 	class HexDecOp
 	{
 		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
+			inline void operator()(const Cell& op,
+					Cell& out)
 			{
 				std::istringstream iss(static_cast<const std::string&> (op));
 				Poco::HexBinaryDecoder dec(iss);

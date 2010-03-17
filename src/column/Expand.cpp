@@ -18,7 +18,7 @@
 
 namespace smartcube
 {
-	Expand::Expand(const std::vector<std::string>& columns) :
+	Expand::Expand(const std::vector<Cell>& columns) :
 		_columns(columns)
 	{
 		// TODO Auto-generated constructor stub

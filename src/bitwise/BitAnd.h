@@ -25,12 +25,9 @@ namespace smartcube
 	class BitAndOp
 	{
 		public:
-			inline void operator ()(const Poco::DynamicAny& op1,
-					const Poco::DynamicAny& op2,
-					Poco::DynamicAny& out)
+			inline void operator ()(const Cell& op1, const Cell& op2, Cell& out)
 			{
-				out = static_cast<long> (static_cast<long> (op1)
-						&& static_cast<long> (op2));
+				out = static_cast<int64_t> (op1) && static_cast<int64_t> (op2);
 			}
 	};
 

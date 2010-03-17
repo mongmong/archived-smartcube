@@ -16,7 +16,7 @@
 
 #include "StringUtil.h"
 
-void StringUtil::splite(const std::string& s, char delimiter, std::vector<
+void StringUtil::split(const std::string& s, char delimiter, std::vector<
 		std::string>& parts)
 {
 	parts.reserve(64);

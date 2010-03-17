@@ -41,7 +41,7 @@ namespace smartcube
 	class SubOp
 	{
 		public:
-			bool operator ()(const Poco::DynamicAny& op1, const Poco::DynamicAny& op2, Poco::DynamicAny& out)
+			bool operator ()(const Cell& op1, const Cell& op2, Cell& out)
 			{
 				out = static_cast<double>(op1) - static_cast<double>(op2);
 				return true;

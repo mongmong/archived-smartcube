@@ -24,30 +24,30 @@
 namespace smartcube
 {
 	/*
-	class Add : public Routine
-	{
-		public:
-			Add(const std::vector<std::size_t>& columns);
-			virtual ~Add();
+	 class Add : public Routine
+	 {
+	 public:
+	 Add(const std::vector<std::size_t>& columns);
+	 virtual ~Add();
 
-		public:
-			virtual void handle(Input& input, Output& output);
+	 public:
+	 virtual void handle(Input& input, Output& output);
 
-		private:
-			std::vector<std::size_t>	_columns;
-	};
-	*/
+	 private:
+	 std::vector<std::size_t>	_columns;
+	 };
+	 */
 
 	class AddOp
 	{
 		public:
-			inline void operator ()(const Poco::DynamicAny& op1, const Poco::DynamicAny& op2, Poco::DynamicAny& out)
+			inline void operator ()(const Cell& op1, const Cell& op2, Cell& out)
 			{
-				out = static_cast<double>(op1) + static_cast<double>(op2);
+				out = static_cast<double> (op1) + static_cast<double> (op2);
 			}
 	};
 
-	typedef SimpleRoutineWrapper< Project2To1RoutineImpl<AddOp>, AddOp > Add;
+	typedef SimpleRoutineWrapper<Project2To1RoutineImpl<AddOp> , AddOp> Add;
 }
 
 #endif /* ADD_H_ */

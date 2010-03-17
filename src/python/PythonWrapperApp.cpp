@@ -18,8 +18,6 @@
 
 #include <boost/python.hpp>
 
-
-
 #include "Input.h"
 #include "InputWrapper.h"
 #include "DummyInput.h"
@@ -55,17 +53,27 @@ namespace smartcube
 	{
 		ConsoleApp::defineOptions(options);
 
-		/*
-		options.addOption(Poco::Util::Option(
-				"", "g", "specify group columns.").required(
-				false).repeatable(false) .argument("group", true).binding(
-				"smartcube.agg.count.groupby"));
+		options.addOption(
+				Poco::Util::Option("module", "m", "specify python module.") .required(
+						true).repeatable(false).argument("module", true).binding(
+						"smartcube.python.module"));
 
-		options.addOption(Poco::Util::Option(
-				"showall", "a", "show all rows.").required(
-				false).repeatable(false).binding(
-				"smartcube.agg.count.showall"));
-		*/
+		options.addOption(
+				Poco::Util::Option(
+						"pydoc", "d", "display python document of the module.") .required(
+						false).repeatable(false).binding(
+						"smartcube.python.displaydoc"));
+		/*
+		 options.addOption(Poco::Util::Option(
+		 "", "g", "specify group columns.").required(
+		 false).repeatable(false) .argument("group", true).binding(
+		 "smartcube.agg.count.groupby"));
+
+		 options.addOption(Poco::Util::Option(
+		 "showall", "a", "show all rows.").required(
+		 false).repeatable(false).binding(
+		 "smartcube.agg.count.showall"));
+		 */
 	}
 
 	const std::string PythonWrapperApp::getUsage() const
@@ -78,7 +86,8 @@ namespace smartcube
 		return "Execute specified module.";
 	}
 
-	void PythonWrapperApp::getProperties(const std::string& base, python::dict& d)
+	void PythonWrapperApp::getProperties(const std::string& base,
+			python::dict& d)
 	{
 		Poco::Util::AbstractConfiguration::Keys keys;
 		config().keys(base, keys);
@@ -103,17 +112,22 @@ namespace smartcube
 		}
 	}
 
-
 	int PythonWrapperApp::main2(const std::vector<std::string>& args)
 	{
-		if (args.size() == 0)
-		{
-			this->displayHelp();
-			return Poco::Util::Application::EXIT_USAGE;
-		}
+		std::string modulename = config().getString(
+				"smartcube.python.module", "sample");
+		bool displaydoc = config().hasOption("smartcube.python.displaydoc");
+
+		/*
+		 if (args.size() == 0)
+		 {
+		 this->displayHelp();
+		 return Poco::Util::Application::EXIT_USAGE;
+		 }
+		 */
 
 		Py_Initialize();
-		atexit(Py_Finalize);
+		atexit( Py_Finalize);
 
 		/*
 		 * Initialize smartcube module
@@ -122,19 +136,35 @@ namespace smartcube
 
 		try
 		{
-			python::object module = python::import(args[0].c_str());
-			python::object routineClass = python::getattr(module, "__routine__");
+			python::object module = python::import(modulename.c_str());
+
+			if (displaydoc)
+			{
+				python::object pydoc = python::import("pydoc");
+				pydoc.attr("doc")(module);
+				;
+				return Poco::Util::Application::EXIT_OK;
+			}
+
+			python::object routineClass =
+					python::getattr(module, "__routine__");
 
 			python::dict d;
 			this->getProperties("", d);
 
-			python::object routine = routineClass(d);
+			python::list pyargs;
+			std::vector<std::string>::const_iterator iter = args.begin();
+			for (; iter != args.end(); ++iter)
+			{
+				pyargs.append(*iter);
+			}
+
+			python::object routine = routineClass(d, pyargs);
 			RoutineWrapper& wrapper =
 					python::extract<RoutineWrapper&>(routine)();
 
 			wrapper.handle(*createInput(), *createOutput());
-		}
-		catch(const python::error_already_set&)
+		} catch (const python::error_already_set&)
 		{
 			PyErr_Print();
 			return Poco::Util::Application::EXIT_SOFTWARE;
@@ -143,4 +173,5 @@ namespace smartcube
 	}
 }
 
-POCO_APP_MAIN(smartcube::PythonWrapperApp);
+POCO_APP_MAIN(smartcube::PythonWrapperApp)
+;

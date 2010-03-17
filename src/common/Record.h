@@ -17,21 +17,33 @@
 #ifndef RECORD_H_
 #define RECORD_H_
 
+#include <stdint.h>
 #include <memory>
 #include <vector>
 
-#include <Poco/SharedPtr.h>
-#include <Poco/DynamicAny.h>
-#include <Poco/Data/RecordSet.h>
+#include <boost/variant.hpp>
 
+#include <Poco/SharedPtr.h>
+
+#include "Cell.h"
 #include "Error.h"
 
 namespace smartcube
 {
-	typedef Poco::DynamicAny Cell;
-	typedef Poco::SharedPtr<Cell> CellPtr;
 
-	class Record: public std::vector<Poco::DynamicAny>
+	/*
+	class Cell : public boost::variant<int64_t, double, bool, std::string>
+	{
+		void a()
+		{
+			this->o
+			this->which();
+		}
+	};
+	*/
+
+
+	class Record: public std::vector<Cell>
 	{
 		public:
 
@@ -48,7 +60,10 @@ namespace smartcube
 				size_t index = 0;
 				for (; index < group; ++index)
 				{
-					if ((*this)[index] != right[index])
+					if ((*this)[index] == right[index])
+					{
+					}
+					else
 					{
 						return false;
 					}
@@ -58,7 +73,7 @@ namespace smartcube
 			}
 
 		public:
-			inline Poco::DynamicAny& operator [](std::size_t index)
+			inline Cell& operator [](std::size_t index)
 			{
 				/*
 				if (index > 1000)
@@ -79,7 +94,7 @@ namespace smartcube
 				}
 			}
 
-			inline const Poco::DynamicAny& operator[] (std::size_t index) const
+			inline const Cell& operator[] (std::size_t index) const
 			{
 				/*
 				if (index > 1000)
@@ -98,17 +113,38 @@ namespace smartcube
 					}
 					return *(begin() + index);
 				}
+			}
+
+			Record& operator = (const python::object& rhs)
+			{
+				this->clear();
+
+				ssize_t max = python::len(rhs);
+				this->reserve(max);
+
+				ssize_t i = 0;
+				for (; i < max; ++i)
+				{
+					(*this).push_back(static_cast<const python::object&>(rhs[i]));
+				}
+
+				return *this;
 			}
 
 		private:
 			Record(const Record&)
 			{
 			}
+
 			Record& operator=(const Record&)
 			{
 				return *this;
 			}
+
 	};
+
+
+
 
 	typedef Poco::SharedPtr<Record> RecordPtr;
 

@@ -26,7 +26,7 @@ namespace smartcube
 	class SignOp
 	{
 		public:
-			bool operator ()(const Poco::DynamicAny& op, Poco::DynamicAny& out)
+			bool operator ()(const Cell& op, Cell& out)
 			{
 				double result = static_cast<double>(op);
 				if (result > 0.0)
@@ -46,7 +46,7 @@ namespace smartcube
 			}
 	};
 
-	typedef Project2To1RoutineImpl<SignOp> Sign;
+	typedef Project1To1RoutineImpl<SignOp> Sign;
 }
 
 #endif /* SIGN_H_ */

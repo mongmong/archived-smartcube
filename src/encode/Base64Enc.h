@@ -29,8 +29,8 @@ namespace smartcube
 	class Base64EncOp
 	{
 		public:
-			inline void operator()(const Poco::DynamicAny& op,
-					Poco::DynamicAny& out)
+			inline void operator()(const Cell& op,
+					Cell& out)
 			{
 				std::ostringstream oss;
 				Poco::Base64Encoder enc(oss);

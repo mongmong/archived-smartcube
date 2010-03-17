@@ -23,15 +23,15 @@
 
 namespace smartcube
 {
-	python::list RecordHelper::vectorToPythonList(const std::vector<Poco::DynamicAny>& vector)
+	python::list RecordHelper::vectorToPythonList(const std::vector<Cell>& vector)
 	{
 		python::list list;
 
-		std::vector<Poco::DynamicAny>::const_iterator iter = vector.begin();
+		std::vector<Cell>::const_iterator iter = vector.begin();
 		for (; iter != vector.end(); iter++)
 		//		BOOST_FOREACH(Poco::DynamicAny& any, vector)
 		{
-			const Poco::DynamicAny& any = *iter;
+			const Cell& any = *iter;
 			if (any.type() == typeid(bool))
 			{
 				list.append(static_cast<bool> (any));

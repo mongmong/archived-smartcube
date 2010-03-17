@@ -26,9 +26,7 @@ namespace smartcube
 	class BitXorOp
 	{
 		public:
-			inline void operator ()(const Poco::DynamicAny& op1,
-					const Poco::DynamicAny& op2,
-					Poco::DynamicAny& out)
+			inline void operator ()(const Cell& op1, const Cell& op2, Cell& out)
 			{
 				uint64_t o1 = static_cast<uint64_t> (op1);
 				uint64_t o2 = static_cast<uint64_t> (op2);

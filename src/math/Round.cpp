@@ -44,7 +44,7 @@ namespace smartcube
 			for (; iter != _columns.end(); ++iter)
 			{
 				std::size_t index = s + iter - _columns.begin();
-				Poco::DynamicAny& any = (*rec)[*iter];
+				Cell& any = (*rec)[*iter];
 
 				(*rec)[index] = round(static_cast<double> (any) / _precision)
 						* _precision;

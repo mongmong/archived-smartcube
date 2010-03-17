@@ -15,8 +15,8 @@ add_executable(xpython
     OutputWrapper.cpp
     PythonWrapperApp.h
     PythonWrapperApp.cpp
-    RecordHelper.h
-    RecordHelper.cpp
+    #RecordHelper.h
+    #RecordHelper.cpp
     RoutineWrapper.h
     RoutineWrapper.cpp
     )

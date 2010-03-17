@@ -33,6 +33,6 @@ namespace smartcube
 
 	void Output::free(RecordPtr rec)
 	{
-		RecordPool::getInstance().free(rec);
+		// RecordPool::getInstance().free(rec);
 	}
 }

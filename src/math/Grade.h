@@ -33,7 +33,7 @@ namespace smartcube
 			{
 			}
 
-			void operator()(const DynamicAny& op, DynamicAny& out)
+			void operator()(const Cell& op, Cell& out)
 			{
 				double d = static_cast<double>(op);
 				double base = std::pow(10.0, int(std::log10(d) - _num + 1)) * _precision;
