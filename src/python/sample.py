@@ -18,6 +18,8 @@ class SampleRoutine(smartcube.Routine):
         #print config
 
     def handle(self, input, output):
+        print input.get_inputs()
+        input = input.get_inputs()[1]
         linenum = 1
         a = input.pop()
         count = 0;

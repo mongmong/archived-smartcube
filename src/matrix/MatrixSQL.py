@@ -6,10 +6,10 @@ import uuid
 import smartcube
 
 class MatrixSQL(smartcube.Routine):
-    def __init__(self, config):
+    def __init__(self, config, args):
         super(MatrixSQL, self).__init__();
 
-        self.sql = config['smartcube.matrix.sql.select']
+        self.sql = args[0]
         if config.has_key('smartcube.matrix.sql.db'):
             self.dbfile = config['smartcube.matrix.sql.db']
         else:

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#include "JoinInput.h"
+#include "Module.h"
+
 #include "InputWrapper.h"
 
 namespace smartcube
@@ -37,4 +40,27 @@ namespace smartcube
 		_input = &input;
 	}
 
+	python::object InputWrapper::getInputs()
+	{
+		python::list obj;
+
+		JoinInput* jinput = dynamic_cast<JoinInput*> (_input);
+
+		if (NULL != jinput)
+		{
+			std::vector<InputPtr>& inputs = jinput->getInputs();
+			std::vector<InputPtr>::iterator iter = inputs.begin();
+
+			for (; iter != inputs.end(); ++iter)
+			{
+				python::object i = Module::InputWrapper();
+				InputWrapper& iwrapper = python::extract<InputWrapper&>(i);
+				iwrapper.wrap(**iter);
+
+				obj.append(i);
+			}
+		}
+
+		return obj;
+	}
 }

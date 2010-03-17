@@ -57,6 +57,8 @@ namespace smartcube
 				return obj;
 			}
 
+			python::object getInputs();
+
 		private:
 			DummyInput _dummyInput;
 			Input* _input;

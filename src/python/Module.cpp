@@ -48,6 +48,7 @@ namespace smartcube
 		InputWrapper =
 				python::class_<smartcube::InputWrapper, boost::noncopyable>("InputWrapper")
 				.def("pop", &smartcube::InputWrapper::pop2)
+				.def("get_inputs", &smartcube::InputWrapper::getInputs)
 				;
 
 		OutputWrapper =

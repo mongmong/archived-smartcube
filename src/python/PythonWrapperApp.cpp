@@ -78,7 +78,7 @@ namespace smartcube
 
 	const std::string PythonWrapperApp::getUsage() const
 	{
-		return "[OPTIONS] <module>";
+		return " -f<module> [OPTIONS] [ARGUMENTS]";
 	}
 
 	const std::string PythonWrapperApp::getHeader() const
