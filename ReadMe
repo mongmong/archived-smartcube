@@ -6,7 +6,7 @@ Description
 
 Authors and Contributors
 ========================
-Chris Chou <m2chrischou@gmail.com>, now working at Yahoo! Beijing R&D Center.
+Chris Chou <m2chrischou@gmail.com>.
 
 License
 =======
@@ -38,16 +38,16 @@ Modules
                 xload.hdfs      TBD
                 xload.meta      TBD
     Aggregate
+                xagg.avg        DONE
                 xagg.count      DONE
-                xagg.sum        DONE
-                xagg.avg        TBD
                 xagg.head       DONE
+                xagg.max        DONE
+                xagg.maxn       TBD
+                xagg.min        DONE
+                xagg.minn       TBD
+                xagg.quantile   DONE
+                xagg.sum        DONE
                 xagg.tail       DONE
-                xagg.max        TBD
-                xagg.min        TBD
-                xagg.medium     TBD
-                xagg.1stq       TBD
-                xagg.3stq       TBD
     Bitwise
                 xbit.and        DONE
                 xbit.or         DONE
@@ -55,8 +55,9 @@ Modules
                 xbit.not        DONE
     Cleansing
                 xcls.backfill   DONE
-                xcls.default    TBD
+                xcls.default    DONE
                 xcls.convert    TBD
+                xcls.htmltable  DONE
     Column
                 xcol.combine    DONE
                 xcol.expand     DONE
@@ -107,6 +108,10 @@ Modules
                 xmath.ceil      DONE
                 xmath.round     DONE
                 xmath.sign      DONE
+    Matrix
+                xmatrix.contrib DONE
+                xmatrix.diff    DONE
+                xmatrix.sql     DONE
     Misc
                 xmisc.norm      DONE
                 xmisc.boxplot   TBD
