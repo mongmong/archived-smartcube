@@ -28,4 +28,10 @@ target_link_libraries(xcls.default
     ${COMMON_LIBS}
     )
     
+add_custom_target(xcls.htmltable ALL
+    COMMAND cp HtmlTable.py ${EXECUTABLE_OUTPUT_PATH}
+    COMMAND cp xcls.htmltable.sh ${EXECUTABLE_OUTPUT_PATH}/xcls.htmltable
+    )
+    
+    
     
