@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
 '''
-Compare two matrices.
+Calculate the contribution of matrix members.
 
-Usage: xmatrix.diff -- -g <group> -p <precision> <lambda> [<lambda> ...]
+Usage: xmatrix.contrib -- -g <group> -p <precision> <lambda> [<lambda> ...]
 
 -g|--group=<group>            specify the number of group columns. [default: 1]
 -p|--precision=<precision>    specify precision. [default:2]
 -a|--absolute                 display absolute contribution.
 -r|--relative                 display relative contribution. [default]
+-t|--total                    display total difference.                  
 <lambda>                      for example, be in following forms:
                                   1. full lambda:
                                         lambda x: x[0] + x[1]
@@ -20,9 +21,9 @@ import numpy as N
 
 import smartcube
 
-class MatrixDiff(smartcube.Routine):
+class MatrixContrib(smartcube.Routine):
     def __init__(self, config, args):
-        super(MatrixDiff, self).__init__()
+        super(MatrixContrib, self).__init__()
 
         opts, args = getopt.getopt(args, "g:p:art", ["group=", "precision=", "relative", "absolute", "total"])
         opts = dict(opts)
@@ -42,6 +43,10 @@ class MatrixDiff(smartcube.Routine):
         self.relative = True
         if opts.has_key('--absolute') or opts.has_key('-a'):
             self.relative = False
+
+        self.total = False
+        if opts.has_key('--total') or opts.has_key('-t'):
+            self.total = True
 
         self.lambdas = []
         for i in args:
@@ -68,12 +73,18 @@ class MatrixDiff(smartcube.Routine):
             key = '\t'.join(l[:self.groupby])
             values = l[self.groupby:]
             keys.add(key)
-            for f in self.lambdas:
-                values.append(f(values))
-            mapold[key] = N.array(values, dtype = float)
+            mapold[key] = values
+
+            if not len(sumold):
+                sumold = N.array([0.0] * len(values))
+            sumold = sumold + N.array(values, dtype = float)
 
             l = old.pop()
 
+        sumoldex = list(sumold)
+        for f in self.lambdas:
+            sumoldex.append(f(sumold))
+        sumoldex = N.array(sumoldex)
         #output.push(sumoldex)
 
         # read new matrix
@@ -82,16 +93,24 @@ class MatrixDiff(smartcube.Routine):
             key = '\t'.join(l[:self.groupby])
             values = l[self.groupby:]
             keys.add(key)
-            for f in self.lambdas:
-                values.append(f(values))
             mapnew[key] = values
+
+            if not len(sumnew):
+                sumnew = N.array([0.0] * len(values))
+            sumnew = sumnew + N.array(values, dtype = float)
 
             l = new.pop()
 
-        #totaldiff = (sumnewex - sumoldex) / sumoldex
+        sumnewex = list(sumnew)
+        for f in self.lambdas:
+            sumnewex.append(f(sumnew))
+        sumnewex = N.array(sumnewex)
+        #output.push(sumnewex)
 
-        #if self.total:
-        #    output.push(['-'] * self.groupby + list(N.round(totaldiff * 100, self.precision)))
+        totaldiff = (sumnewex - sumoldex) / sumoldex
+
+        if self.total:
+            output.push(['-'] * self.groupby + list(N.round(totaldiff * 100, self.precision)))
 
         for key in keys:
             recold = []
@@ -101,22 +120,31 @@ class MatrixDiff(smartcube.Routine):
             if mapnew.has_key(key):
                 recnew = mapnew[key]
 
-            if not len(recold):
+            if not recold:
                 recold = N.array([0.0] * len(recnew), dtype = float)
                 recnew = N.array(recnew, dtype = float)
-            elif not len(recnew):
+            elif not recnew:
                 recold = N.array(recold, dtype = float)
                 recnew = N.array([0.0] * len(recold), dtype = float)
             else:
                 recold = N.array(recold, dtype = float)
                 recnew = N.array(recnew, dtype = float)
 
+            sum = sumold - recold + recnew
+
+            sumex = list(sum)
+            for f in self.lambdas:
+                sumex.append(f(sum))
+            sumex = N.array(sumex)
+            #output.push(sumnewex)
+
+            diff = (sumex - sumoldex) / sumoldex
             if self.relative:
-                diff = (recnew - recold) / recold * 100
+                diff2 = diff / totaldiff
             else:
-                diff = recnew - recold
-            output.push(key.split('\t') + list(N.round(diff, self.precision)))
+                diff2 = diff
+            output.push(key.split('\t') + list(N.round(diff2 * 100, self.precision)))
 
 
 
-__routine__ = MatrixDiff
+__routine__ = MatrixContrib

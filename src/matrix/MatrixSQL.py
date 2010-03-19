@@ -7,7 +7,7 @@ import smartcube
 
 class MatrixSQL(smartcube.Routine):
     def __init__(self, config, args):
-        super(MatrixSQL, self).__init__();
+        super(MatrixSQL, self).__init__()
 
         self.sql = args[0]
         if config.has_key('smartcube.matrix.sql.db'):

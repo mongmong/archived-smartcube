@@ -272,7 +272,10 @@ namespace smartcube
 			}
 			const std::string operator()(double v) const
 			{
-				return Poco::NumberFormatter::format(v);
+				char buf[128];
+				std::sprintf(buf, "%.15G", v);
+				return buf;
+				//return Poco::NumberFormatter::format(v);
 			}
 			const std::string operator()(bool v) const
 			{

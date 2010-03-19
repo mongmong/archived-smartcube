@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #include <boost/algorithm/string/replace.hpp>
 #include <Poco/String.h>
 #include <Poco/NumberFormatter.h>
@@ -31,8 +30,7 @@ namespace smartcube
 		_tmp.reserve(1024);
 	}
 
-	SimpleOutput::SimpleOutput(
-			const std::string& path, char fieldSeparator) :
+	SimpleOutput::SimpleOutput(const std::string& path, char fieldSeparator) :
 		_ofstream(path), _fieldSeparator(fieldSeparator)
 	{
 	}
@@ -44,6 +42,11 @@ namespace smartcube
 
 	void SimpleOutput::push(RecordPtr record)
 	{
+		if (!_ofstream.good())
+		{
+			return;
+		}
+
 		_tmp.clear();
 		//std::ostringstream oss;
 
@@ -57,14 +60,19 @@ namespace smartcube
 			}
 
 			//std::cout << static_cast<const std::string&>(*iter);
-			_tmp.append(static_cast<const std::string&>(*iter));
+			_tmp.append(static_cast<const std::string&> (*iter));
 			// oss << static_cast<const std::string&> (*iter);
 			//oss << iter.base();
 		}
 
 		_tmp.append(1, '\n');
 
-		_ofstream << _tmp;
+		try
+		{
+			_ofstream.write(_tmp.c_str(), _tmp.size());
+		} catch (std::exception&)
+		{
+		}
 
 		// _ofstream << oss.str() << std::endl;
 
