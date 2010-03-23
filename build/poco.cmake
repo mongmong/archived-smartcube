@@ -6,7 +6,7 @@ find_path(POCO_INCLUDE_DIR Poco/Poco.h
     /opt/local/include
     )
     
-find_path(POCO_LIBRARY_DIR libPocoFoundation.8.dylib
+find_path(POCO_LIBRARY_DIR libPoco*
     /lib
     /usr/lib
     /usr/local/lib
