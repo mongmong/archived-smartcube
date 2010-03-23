@@ -7,7 +7,7 @@ if(PYTHONLIBS_FOUND)
     include_directories(${PYTHON_INCLUDE_DIRS})
     link_directories(${PYTHON_LIBRARIES})
 else(PYTHONLIBS_FOUND)
-    message(fatal_error "Cannot find Python libs.")
+    message(WARNING "Cannot find Python libs.")
     
     include_directories("/usr/include")
     link_directories("/usr/lib")
